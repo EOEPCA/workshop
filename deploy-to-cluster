@@ -1,0 +1,104 @@
+#!/usr/bin/env bash
+
+ORIG_DIR="$(pwd)"
+cd "$(dirname "$0")"
+BIN_DIR="$(pwd)"
+
+onExit() {
+  cd "${ORIG_DIR}"
+}
+trap onExit EXIT
+
+usage() {
+  echo "Usage:"
+  echo "./deploy-to-cluster [options]"
+  echo " "
+  echo "options                          | Required | Default   | Description"
+  echo "-h, --help                       | false    | N/A       | Show this description"
+  echo "-r, --repo <repository name>     | true     | workshop  | The name of the repository to deploy from"
+  echo "-b, --branch <repository branch> | true     | main      | The branch of the repository to deploy from"
+  echo "-p, --path <repository path>     | true     |           | The path in the repository containing the deployment"
+  echo "-o, --owner <repository owner>   | true     | EOEPCA    | The owner of the repository"
+  echo "--personal  <true|false>         | false    | false     | If true, the owner is assumed to be a GitHub user; otherwise an org"
+  echo
+}
+
+setDefaults() {
+  repository="workshop"
+  owner="EOEPCA"
+  branch="main"
+  personal="false"
+}
+
+processArgs() {
+  setDefaults
+
+  for arg in "$@"; do
+    case "$arg" in
+      "-r" | "--repository")
+        shift
+        repository="${arg}"
+        ;;
+      "-o" | "--owner")
+        shift
+        owner="${arg}"
+        ;;
+      "-b" | "--branch")
+        shift
+        branch="${arg}"
+        ;;
+      "-p" | "--path")
+        shift
+        path="${arg}"
+        ;;
+      "--personal")
+        shift
+        personal="${arg}"
+        ;;
+      "-h" | "--help")
+        usage
+        exit 0
+        ;;
+      *)
+        echo "ERROR: Invalid argument ${arg}" 1>&2
+        usage
+        exit 1
+        ;;
+    esac
+    shift
+  done
+}
+
+validateArgs() {
+  if [ -z "${owner}" ]; then
+    echo "ERROR: owner must be set"
+    usage
+    exit 1
+  fi
+  if [ -z "${repository}" ]; then
+    echo "ERROR: repository must be set"
+    usage
+    exit 1
+  fi
+  if [ -z "${branch}" ]; then
+    echo "ERROR: branch must be set"
+    usage
+    exit 1
+  fi
+  if [ -z "${path}" ]; then
+    echo "ERROR: path must be set"
+    usage
+    exit 1
+  fi
+}
+
+processArgs $@
+validateArgs
+
+flux bootstrap github \
+  --owner="${owner}" \
+  --repository="${repository}" \
+  --branch="${branch}" \
+  --path="${path}" \
+  --private=false \
+  --personal=${personal}
