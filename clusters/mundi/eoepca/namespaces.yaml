@@ -2,24 +2,24 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: ingress
+  name: eoepca-system
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: object-storage
+  name: eoepca-object-storage
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: user-management
+  name: eoepca-user-management
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: processing-chaining
+  name: eoepca-processing-chaining
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: resource-management
+  name: eoepca-resource-management
