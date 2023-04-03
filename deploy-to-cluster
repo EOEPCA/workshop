@@ -33,34 +33,34 @@ setDefaults() {
 processArgs() {
   setDefaults
 
-  for arg in "$@"; do
-    case "$arg" in
+  while [ $# -gt 0 ]; do
+    case "$1" in
       "-r" | "--repository")
         shift
-        repository="${arg}"
+        repository="${1}"
         ;;
       "-o" | "--owner")
         shift
-        owner="${arg}"
+        owner="${1}"
         ;;
       "-b" | "--branch")
         shift
-        branch="${arg}"
+        branch="${1}"
         ;;
       "-p" | "--path")
         shift
-        path="${arg}"
+        path="${1}"
         ;;
       "--personal")
         shift
-        personal="${arg}"
+        personal="${1}"
         ;;
       "-h" | "--help")
         usage
         exit 0
         ;;
       *)
-        echo "ERROR: Invalid argument ${arg}" 1>&2
+        echo "ERROR: Invalid argument ${1}" 1>&2
         usage
         exit 1
         ;;
