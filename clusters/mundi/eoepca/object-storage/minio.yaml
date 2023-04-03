@@ -1,0 +1,36 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: minio
+  namespace: object-storage
+spec:
+  interval: 2m
+  url: https://charts.bitnami.com/bitnami
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: minio
+  namespace: object-storage
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: minio
+      sourceRef:
+        kind: HelmRepository
+        name: minio
+        namespace: object-storage
+  values:
+    existingSecret: minio-credentials
+
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      hostname: minio-console.192.168.49.2.nip.io
+
+    persistence:
+      storageClass: standard
+
+    defaultBuckets: "eoepca, cache-bucket"
