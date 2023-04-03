@@ -7,19 +7,19 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: minio
+  name: object-storage
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: um
+  name: user-management
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: proc
+  name: processing-chaining
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: rm
+  name: resource-management
