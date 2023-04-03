@@ -14,7 +14,6 @@ metadata:
   name: nginx
   namespace: eoepca-system
 spec:
-  interval: 5m 
   chart:
     spec:
       chart: ingress-nginx
@@ -22,6 +21,7 @@ spec:
         kind: HelmRepository
         name: nginx
         namespace: eoepca-system
+  interval: 5m
   values:
     controller:
       config:
