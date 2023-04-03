@@ -28,7 +28,7 @@ spec:
     ingress:
       enabled: true
       ingressClassName: nginx
-      hostname: minio-console.192.168.49.2.nip.io
+      hostname: minio-console.80.158.33.204.nip.io
 
     persistence:
       storageClass: standard
