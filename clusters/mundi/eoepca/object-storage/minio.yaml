@@ -25,6 +25,9 @@ spec:
   values:
     existingSecret: minio-credentials
 
+    persistence:
+      storageClass: managed-nfs-storage-retain
+
     ingress:
       enabled: true
       hosts:
