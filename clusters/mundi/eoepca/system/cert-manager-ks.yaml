@@ -3,7 +3,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
   name: cert-manager
-  namespace: eoepca-system
+  namespace: flux-system
 spec:
   interval: 5m
   path: "./cert-manager.yaml"
@@ -21,7 +21,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
   name: cert-issuer
-  namespace: eoepca-system
+  namespace: flux-system
 spec:
   dependsOn:
     - name: cert-manager
