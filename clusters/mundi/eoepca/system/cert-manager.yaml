@@ -30,6 +30,6 @@ spec:
       # - https://github.com/cert-manager/cert-manager/issues/4646
       timeout: 10m
   install:
-    crds: Create
+    crds: CreateReplace
   upgrade:
     crds: CreateReplace
