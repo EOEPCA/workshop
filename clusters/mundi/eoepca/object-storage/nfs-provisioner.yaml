@@ -21,7 +21,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: nfs-subdir-external-provisioner
-        namespace: common
+        namespace: eoepca-object-storage
   values:
     provisionerName: nfs-storage
     storageClass:
@@ -48,7 +48,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: nfs-subdir-external-provisioner
-        namespace: common
+        namespace: eoepca-object-storage
   values:
     provisionerName: nfs-storage-retain
     storageClass:
