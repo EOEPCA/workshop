@@ -27,10 +27,5 @@ spec:
       ingressClassResource:
         default: true
       loadBalancerIP: 80.158.54.66
-      service:
-        type: NodePort
-        nodePorts:
-          http: 31080
-          https: 31443
       publishService:
         enabled: false
