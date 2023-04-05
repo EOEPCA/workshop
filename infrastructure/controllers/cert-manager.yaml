@@ -23,6 +23,7 @@ spec:
         namespace: eoepca-system
   interval: 5m
   values:
+    installCRDs: true
     startupapicheck:
       # The default timeout can be too short for the webhook to fully initialise
       # and determine the setup is successful in time. See:
