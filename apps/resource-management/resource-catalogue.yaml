@@ -12,7 +12,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: resource-catalogue
-  namespace: eoepca-resource-management
+  namespace: rm
 spec:
   interval: 5m 
   chart:
@@ -25,7 +25,7 @@ spec:
         namespace: eoepca-system
   values:
     global:
-      namespace: eoepca-resource-management
+      namespace: rm
     db:
       volume_size: 5Gi
     ingress:

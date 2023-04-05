@@ -12,14 +12,14 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: eoepca-user-management
+  name: um
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: eoepca-processing-chaining
+  name: proc
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: eoepca-resource-management
+  name: rm
