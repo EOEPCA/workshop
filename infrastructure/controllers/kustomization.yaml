@@ -3,6 +3,5 @@ kind: Kustomization
 resources:
 - cert-manager.yaml
 - namespaces.yaml
-- nfs-provisioner.yaml
 - nginx.yaml
 - sealed-secrets.yaml
