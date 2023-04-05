@@ -27,19 +27,13 @@ spec:
     global:
       namespace: eoepca-resource-management
     ingress:
-      # the resource-catalogue helm charts insists on configuring tls,
-      # which is not what we want, so disable the ingress and create it ourselves
-      enabled: false
-      # name: resource-catalogue
-      # host: resource-catalogue.192-168-49-2.nip.io
-      # # we're not using tls, but the resource-catalogue helm chart insists on
-      # # having values anyway - so may as well set consistent values
-      # tls_host: resource-catalogue.192-168-49-2.nip.io
-      # tls_secret_name: resource-catalogue-tls
-      # annotations:
-      #   nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
-    db:
-      volume_storage_type: standard
+      enabled: true
+      name: resource-catalogue
+      host: resource-catalogue.80-158-54-66.nip.io
+      tls_host: resource-catalogue.80-158-54-66.nip.io
+      tls_secret_name: resource-catalogue-tls
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
     pycsw:
       image:
         repository: geopython/pycsw
@@ -47,7 +41,7 @@ spec:
         tag: "eoepca-staging"
       config:
         server:
-          url: http://resource-catalogue.80.158.54.66.nip.io/
+          url: http://resource-catalogue.80-158-54-66.nip.io/
           federatedcatalogues: https://sentinel2.browse.catalog.mundiwebservices.com/csw
         metadata:
           identification_title: EOEPCA Resource Catalogue
