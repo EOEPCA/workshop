@@ -30,20 +30,7 @@ spec:
 
     ingress:
       enabled: true
-      hosts:
-        - minio.80.158.54.66.nip.io
-      ingressClassName: nginx
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt
-      tls:
-        - secretName: minio-tls
-          hosts:
-            - minio.80.158.54.66.nip.io
-
-    consoleIngress:
-      enabled: true
-      hosts:
-        - console.minio.80.158.54.66.nip.io
+      hostname: console.minio.80.158.54.66.nip.io
       ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
@@ -51,5 +38,16 @@ spec:
         - secretName: minio-console-tls
           hosts:
             - console.minio.80.158.54.66.nip.io
+
+    apiIngress:
+      enabled: true
+      hostname: minio.80.158.54.66.nip.io
+      ingressClassName: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+      tls:
+        - secretName: minio-tls
+          hosts:
+            - minio.80.158.54.66.nip.io
 
     defaultBuckets: "eoepca, cache-bucket"
