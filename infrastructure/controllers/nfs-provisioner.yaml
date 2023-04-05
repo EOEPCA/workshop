@@ -35,7 +35,8 @@ spec:
       # Check route tables, cloud security groups e.t.c associated with this server
       server: "192.168.0.222"
       path: /data/dynamic
-  interval: 1m0s
+  timeout: 15m
+  interval: 30m0s
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
@@ -63,4 +64,5 @@ spec:
       # Check route tables, cloud security groups e.t.c associated with this server
       server: "192.168.0.222"
       path: /data/dynamic
-  interval: 1m0s
+  timeout: 15m
+  interval: 30m0s
