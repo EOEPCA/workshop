@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
 - nfs-provisioner.yaml
 - minio.yaml
+- storage.yaml
