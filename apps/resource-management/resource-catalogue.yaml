@@ -43,15 +43,7 @@ spec:
         server:
           url: http://resource-catalogue.80-158-54-66.nip.io/
           federatedcatalogues: https://sentinel2.browse.catalog.mundiwebservices.com/csw
-        metadata:
-          identification_title: EOEPCA Resource Catalogue
-          identification_abstract: Based on pycsw, a Python OGC CSW server implementation
-          identification_keywords: catalogue,discovery,metadata
-          identification_keywords_type: theme
-          identification_fees: None
-          identification_accessconstraints: None
-          provider_name: EOEPCA
-          provider_url: https://eoepca.org/
+
 # ---
 # apiVersion: networking.k8s.io/v1
 # kind: Ingress
