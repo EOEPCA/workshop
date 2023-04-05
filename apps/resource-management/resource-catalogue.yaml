@@ -26,6 +26,8 @@ spec:
   values:
     global:
       namespace: eoepca-resource-management
+    db:
+      volume_size: 5Gi
     ingress:
       enabled: true
       name: resource-catalogue
@@ -36,9 +38,7 @@ spec:
         cert-manager.io/cluster-issuer: letsencrypt
     pycsw:
       image:
-        repository: geopython/pycsw
-        pullPolicy: IfNotPresent
-        tag: "eoepca-staging"
+        pullPolicy: Always
       config:
         server:
           url: http://resource-catalogue.80-158-54-66.nip.io/
