@@ -23,7 +23,8 @@ spec:
         name: minio
         namespace: eoepca-object-storage
   values:
-    existingSecret: minio-credentials
+    auth:
+      existingSecret: minio-credentials
 
     persistence:
       storageClass: managed-nfs-storage-retain

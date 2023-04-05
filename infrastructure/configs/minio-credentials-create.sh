@@ -13,13 +13,13 @@ trap onExit EXIT
 SECRET_NAME="minio-credentials"
 NAMESPACE="eoepca-object-storage"
 
-ROOT_USER={1:-admin}
+ROOT_USER="${1:-admin}"
 ROOT_PWD=$(tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_`{|}~' </dev/urandom | head -c 64  ; echo)
 
 secretYaml() {
   kubectl -n "${NAMESPACE}" create secret generic "${SECRET_NAME}" \
-    --from-literal="rootUser=$(ROOT_USER)" \
-    --from-literal="rootPassword=$(ROOT_PWD)" \
+    --from-literal="root-user=$ROOT_USER" \
+    --from-literal="root-psassword=$ROOT_PWD" \
     --dry-run=client -o yaml
 }
 
