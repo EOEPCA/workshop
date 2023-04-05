@@ -5,4 +5,3 @@ resources:
 - namespaces.yaml
 - nginx.yaml
 - sealed-secrets.yaml
-- nfs-provisioner.yaml
