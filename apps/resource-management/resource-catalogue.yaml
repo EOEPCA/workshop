@@ -1,0 +1,96 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: resource-catalogue
+  namespace: eoepca-resource-management
+spec:
+  interval: 5m 
+  chart:
+    spec:
+      chart: rm-resource-catalogue
+      version: 1.2.0
+      sourceRef:
+        kind: HelmRepository
+        name: eoepca
+        namespace: eoepca-system
+  values:
+    global:
+      namespace: eoepca-resource-management
+    ingress:
+      # the resource-catalogue helm charts insists on configuring tls,
+      # which is not what we want, so disable the ingress and create it ourselves
+      enabled: false
+      # name: resource-catalogue
+      # host: resource-catalogue.192-168-49-2.nip.io
+      # # we're not using tls, but the resource-catalogue helm chart insists on
+      # # having values anyway - so may as well set consistent values
+      # tls_host: resource-catalogue.192-168-49-2.nip.io
+      # tls_secret_name: resource-catalogue-tls
+      # annotations:
+      #   nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    db:
+      volume_storage_type: standard
+    pycsw:
+      image:
+        repository: geopython/pycsw
+        pullPolicy: IfNotPresent
+        tag: "eoepca-staging"
+      config:
+        server:
+          url: http://resource-catalogue.80.158.54.66.nip.io/
+          federatedcatalogues: https://sentinel2.browse.catalog.mundiwebservices.com/csw
+        metadata:
+          identification_title: EOEPCA Resource Catalogue
+          identification_abstract: Based on pycsw, a Python OGC CSW server implementation
+          identification_keywords: catalogue,discovery,metadata
+          identification_keywords_type: theme
+          identification_fees: None
+          identification_accessconstraints: None
+          provider_name: EOEPCA
+          provider_url: https://eoepca.org/
+          contact_name: Lastname, Firstname
+          contact_position: Position Title
+          contact_address: Mailing Address
+          contact_city: City
+          contact_stateorprovince: Administrative Area
+          contact_postalcode: Zip or Postal Code
+          contact_country: Country
+          contact_phone: +xx-xxx-xxx-xxxx
+          contact_fax: +xx-xxx-xxx-xxxx
+          contact_email: Email Address
+          contact_url: Contact URL
+          contact_hours: Hours of Service
+          contact_instructions: During hours of service.  Off on weekends.
+          contact_role: pointOfContact
+        inspire:
+          enabled: "true"
+          languages_supported: eng
+          default_language: eng
+          date: YYYY-MM-DD
+          gemet_keywords: Utility and governmental services
+          conformity_service: notEvaluated
+          contact_name: Organization Name
+          contact_email: Email Address
+          temp_extent: YYYY-MM-DD/YYYY-MM-DD
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: resource-catalogue
+  namespace: rm
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+spec:
+  rules:
+  - host: resource-catalogue.80.158.54.66.nip.io
+    http:
+      paths:
+      - backend:
+          service:
+            name: resource-catalogue-service
+            port:
+              number: 80
+        pathType: ImplementationSpecific
