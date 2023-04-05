@@ -31,6 +31,8 @@ spec:
       archiveOnDelete: false
       allowVolumeExpansion: true
     nfs:
+      # It should be ensured that the cluster can access this server 
+      # Check route tables, cloud security groups e.t.c associated with this server
       server: "192.168.0.222"
       path: /data/dynamic
   interval: 1m0s
@@ -57,6 +59,8 @@ spec:
       reclaimPolicy: Retain
       allowVolumeExpansion: true
     nfs:
+      # It should be ensured that the cluster can access this server 
+      # Check route tables, cloud security groups e.t.c associated with this server
       server: "192.168.0.222"
       path: /data/dynamic
   interval: 1m0s
