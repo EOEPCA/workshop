@@ -487,3 +487,35 @@ spec:
           customClientDaysPast1: 90
           customClientDaysPast2: 1
           customClientDaysFuture1: 7
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: data-access-db
+  namespace: rm
+  labels:
+    k8s-app: data-access
+    name: data-access
+spec:
+  storageClassName: managed-nfs-storage
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 100Gi
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: data-access-redis
+  namespace: rm
+  labels:
+    k8s-app: data-access
+    name: data-access
+spec:
+  storageClassName: managed-nfs-storage
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
