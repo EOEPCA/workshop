@@ -19,10 +19,7 @@ spec:
       name: minio-credentials
       valuesKey: root-user
       targetPath: global.storage.cache.access_key_id
-    - kind: Secret
-      name: minio-credentials
-      valuesKey: root-password
-      targetPath: global.storage.cache.secret_access_key
+
   values:
     global:
       env:
