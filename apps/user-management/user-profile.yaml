@@ -15,7 +15,7 @@ spec:
   values:
     global:
       domain: auth.workshop.eoepca.org
-      nginxIp: 192.168.0.234
+      nginxIp: 80.158.54.66
     volumeClaim:
       name: eoepca-userman-pvc
       create: false
