@@ -22,8 +22,8 @@ spec:
     ingress:
       enabled: true
       name: resource-catalogue
-      host: resource-catalogue.80-158-54-66.nip.io
-      tls_host: resource-catalogue.80-158-54-66.nip.io
+      host: resource-catalogue.workshop.eoepca.org
+      tls_host: resource-catalogue.workshop.eoepca.org
       tls_secret_name: resource-catalogue-tls
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
@@ -32,5 +32,5 @@ spec:
         pullPolicy: Always
       config:
         server:
-          url: https://resource-catalogue.80-158-54-66.nip.io/
+          url: https://resource-catalogue.workshop.eoepca.org/
           federatedcatalogues: https://sentinel2.browse.catalog.mundiwebservices.com/csw

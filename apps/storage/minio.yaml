@@ -31,24 +31,24 @@ spec:
 
     ingress:
       enabled: true
-      hostname: console.minio.80-158-54-66.nip.io
+      hostname: console.minio.workshop.eoepca.org
       ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
       tls:
         - secretName: minio-console-tls
           hosts:
-            - console.minio.80-158-54-66.nip.io
+            - console.minio.workshop.eoepca.org
 
     apiIngress:
       enabled: true
-      hostname: minio.80-158-54-66.nip.io
+      hostname: minio.workshop.eoepca.org
       ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
       tls:
         - secretName: minio-tls
           hosts:
-            - minio.80-158-54-66.nip.io
+            - minio.workshop.eoepca.org
 
     defaultBuckets: "eoepca, cache-bucket"
