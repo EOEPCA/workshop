@@ -41,7 +41,7 @@ spec:
         pullPolicy: Always
       config:
         server:
-          url: http://resource-catalogue.80-158-54-66.nip.io/
+          url: https://resource-catalogue.80-158-54-66.nip.io/
           federatedcatalogues: https://sentinel2.browse.catalog.mundiwebservices.com/csw
 
 # ---
