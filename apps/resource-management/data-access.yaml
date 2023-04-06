@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: data-access
-      version: 1.2.2
+      version: 2.3.3
       sourceRef:
         kind: HelmRepository
         name: eoepca
@@ -431,7 +431,6 @@ spec:
           #       kwargs:
           #         repository_database_uri: postgresql://postgres:mypass@resource-catalogue-db/pycsw
           #         ows_url: https://${name}.${domain}/ows
-
 
       harvester:
         replicaCount: 1
