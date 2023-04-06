@@ -10,21 +10,34 @@ onExit() {
 
 trap onExit EXIT
 
+CREDS_FILE="minio-credentials.yaml"
 SECRET_NAME="minio-credentials"
 NAMESPACE="eoepca-object-storage"
 
+randomCharacters() {
+  length=$1
+  tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_`{|}~' </dev/urandom | head -c $length  ; echo
+}
+
 ROOT_USER="${1:-admin}"
-ROOT_PWD=$(tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_`{|}~' </dev/urandom | head -c 64  ; echo)
+ROOT_PWD=$(randomCharacters 64)
 
 secretYaml() {
-  kubectl -n "${NAMESPACE}" create secret generic "${SECRET_NAME}" \
+  kubectl -n "${1}" create secret generic "${SECRET_NAME}" \
     --from-literal="root-user=$ROOT_USER" \
     --from-literal="root-password=$ROOT_PWD" \
     --dry-run=client -o yaml
 }
 
-# Create Secret and then pipe to kubeseal to create the SealedSecret
-secretYaml | kubeseal -o yaml \
-  --namespace=${NAMESPACE} \
-  --controller-name sealed-secrets-controller \
-  --controller-namespace eoepca-system > minio-credentials.yaml
+> ${CREDS_FILE}
+for namespaceRequiringCreds in eoepca-object-storage rm
+do
+  echo --- >> ${CREDS_FILE}
+  # Create Secret and then pipe to kubeseal to create the SealedSecret
+  secretYaml ${namespaceRequiringCreds} | kubeseal -o yaml \
+    --namespace=${NAMESPACE} \
+    --controller-name sealed-secrets-controller \
+    --controller-namespace eoepca-system >> ${CREDS_FILE}
+done
+
+
