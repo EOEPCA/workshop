@@ -16,7 +16,7 @@ NAMESPACE="eoepca-object-storage"
 
 randomCharacters() {
   length=$1
-  tr -dc 'A-Za-z0-9!#%&()*+,-:<=>?@[\]^_`{}~' </dev/urandom | head -c $length  ; echo
+  tr -dc 'A-Za-z0-9!#%&()*+,-<>?@^_`{}~' </dev/urandom | head -c $length  ; echo
 }
 
 ROOT_USER="${1:-admin}"
