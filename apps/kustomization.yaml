@@ -3,6 +3,6 @@ kind: Kustomization
 resources:
 - eoepca-repository.yaml
 - storage/
-- resource-management/
-- processing-and-chaining/
-- user-management/
+# - resource-management/
+# - processing-and-chaining/
+# - user-management/
