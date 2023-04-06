@@ -4,3 +4,4 @@ resources:
 - eoepca-repository.yaml
 - storage/
 - resource-management/
+- processing-and-chaining/
