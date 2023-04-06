@@ -1,0 +1,83 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: ades
+  namespace: proc
+spec:
+  chart:
+    spec:
+      chart: ades
+      version: 2.0.6
+      sourceRef:
+        kind: HelmRepository
+        name: eoepca
+        namespace: eoepca-system
+  valuesFrom:
+    - kind: Secret
+      name: minio-credentials
+      valuesKey: root-user
+      targetPath: workflowExecutor.inputs.STAGEOUT_AWS_ACCESS_KEY_ID
+    - kind: Secret
+      name: minio-credentials
+      valuesKey: root-password
+      targetPath: workflowExecutor.inputs.STAGEOUT_AWS_SECRET_ACCESS_KEY
+  values:
+    replicaCount: 1
+    image:
+      pullPolicy: Always
+    ingress:
+      ingressClassName: nginx
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        ingress.kubernetes.io/ssl-redirect: "false"
+        nginx.ingress.kubernetes.io/ssl-redirect: "false"
+        cert-manager.io/cluster-issuer: letsencrypt
+      hosts:
+        - host: ades.workshop.eoepca.org
+          paths:
+            - path: /
+              pathType: ImplementationSpecific    
+      tls:
+        - hosts:
+            - ades.workshop.eoepca.org
+          secretName: ades-tls
+    
+    persistence:
+      storageClass: "managed-nfs-storage"
+
+    workflowExecutor:
+      inputs:
+        APP: ades
+
+        STAGEIN_AWS_SERVICEURL: http://data.cloudferro.com
+        STAGEIN_AWS_ACCESS_KEY_ID: test
+        STAGEIN_AWS_SECRET_ACCESS_KEY: test
+        STAGEIN_AWS_REGION: RegioneOne
+
+        STAGEOUT_AWS_SERVICEURL: http://minio.workshop.eoepca.org
+        STAGEOUT_AWS_REGION: us-east-1
+        STAGEOUT_OUTPUT: s3://eoepca
+        # Loaded from Secrets
+        # STAGEOUT_AWS_ACCESS_KEY_ID: 4ceda7292edc4cc997d133079b469900
+        # STAGEOUT_AWS_SECRET_ACCESS_KEY: 7d824cbfc90147318fa6ac7fe0e9a174
+
+      # Enable if integrating with workspace for stageout
+      # useResourceManager: "true"
+      # resourceManagerWorkspacePrefix: "develop-user"
+      # resourceManagerEndpoint: "https://workspace-api.workshop.eoepca.org"
+      # platformDomain: "https://auth.workshop.eoepca.org"
+
+      processingStorageClass: managed-nfs-storage
+      processingVolumeTmpSize: "6Gi"
+      processingVolumeOutputSize: "6Gi"
+      processingMaxRam: "8Gi"
+      processingMaxCores: "4"
+     
+    wps:
+      pepBaseUrl: "http://ades-pep:5576"
+      usePep: "true"
+      maincfgtpl: "files/main.cfg.tpl"
+
+    # values - end
+  # timeout: 25m0s
+  interval: 1m0s
