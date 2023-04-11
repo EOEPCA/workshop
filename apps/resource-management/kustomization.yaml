@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
 - resource-catalogue.yaml
 - data-access.yaml
+- workspace-api.yaml

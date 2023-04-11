@@ -27,7 +27,7 @@ secretYaml() {
 }
 
 > ${CREDS_FILE}
-for namespaceRequiringCreds in eoepca-storage
+for namespaceRequiringCreds in eoepca-storage rm
 do
   echo --- >> ${CREDS_FILE}
   # Create Secret and then pipe to kubeseal to create the SealedSecret
