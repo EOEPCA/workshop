@@ -10,7 +10,7 @@ onExit() {
 
 trap onExit EXIT
 
-APP_NAME="minio"
+APP_NAME="harbor"
 CREDS_FILE="${APP_NAME}-credentials.yaml"
 SECRET_NAME="${APP_NAME}-credentials"
 NAMESPACE="eoepca-storage"
@@ -20,18 +20,16 @@ randomCharacters() {
   tr -dc 'A-Za-z0-9!#%&()*+,-<>?@^_`{}~' </dev/urandom | head -c $length  ; echo
 }
 
-ROOT_USER="${1:-admin}"
 ROOT_PWD=$(randomCharacters 64)
 
 secretYaml() {
   kubectl -n "${1}" create secret generic "${SECRET_NAME}" \
-    --from-literal="root-user=$ROOT_USER" \
-    --from-literal="root-password=$ROOT_PWD" \
+    --from-literal="password=$ROOT_PWD" \
     --dry-run=client -o yaml
 }
 
 > ${CREDS_FILE}
-for namespaceRequiringCreds in eoepca-storage rm proc
+for namespaceRequiringCreds in eoepca-storage
 do
   echo --- >> ${CREDS_FILE}
   # Create Secret and then pipe to kubeseal to create the SealedSecret

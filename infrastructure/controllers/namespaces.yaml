@@ -7,7 +7,7 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: eoepca-object-storage
+  name: eoepca-storage
 ---
 apiVersion: v1
 kind: Namespace

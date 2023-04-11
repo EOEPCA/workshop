@@ -2,7 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: storage
-  namespace: eoepca-object-storage
+  namespace: eoepca-storage
 spec:
   chart:
     spec:
