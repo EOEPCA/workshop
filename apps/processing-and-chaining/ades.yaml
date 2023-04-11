@@ -31,7 +31,7 @@ spec:
         kubernetes.io/ingress.class: nginx
         ingress.kubernetes.io/ssl-redirect: "false"
         nginx.ingress.kubernetes.io/ssl-redirect: "false"
-        cert-manager.io/cluster-issuer: letsencrypt
+        cert-manager.io/cluster-issuer: letsencrypt-staging
       hosts:
         - host: ades.workshop.eoepca.org
           paths:

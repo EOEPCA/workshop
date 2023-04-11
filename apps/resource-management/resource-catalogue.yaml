@@ -26,7 +26,7 @@ spec:
       tls_host: resource-catalogue.workshop.eoepca.org
       tls_secret_name: resource-catalogue-tls
       annotations:
-        cert-manager.io/cluster-issuer: letsencrypt
+        cert-manager.io/cluster-issuer: letsencrypt-staging
     pycsw:
       image:
         pullPolicy: Always

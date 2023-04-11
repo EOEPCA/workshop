@@ -34,7 +34,7 @@ spec:
       hostname: console.minio.workshop.eoepca.org
       ingressClassName: nginx
       annotations:
-        cert-manager.io/cluster-issuer: letsencrypt
+        cert-manager.io/cluster-issuer: letsencrypt-staging
       tls:
         - secretName: minio-console-tls
           hosts:
@@ -45,7 +45,7 @@ spec:
       hostname: minio.workshop.eoepca.org
       ingressClassName: nginx
       annotations:
-        cert-manager.io/cluster-issuer: letsencrypt
+        cert-manager.io/cluster-issuer: letsencrypt-staging
       tls:
         - secretName: minio-tls
           hosts:

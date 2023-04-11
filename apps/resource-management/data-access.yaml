@@ -39,7 +39,7 @@ spec:
           kubernetes.io/tls-acme: "true"
           nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
           nginx.ingress.kubernetes.io/enable-cors: "true"
-          cert-manager.io/cluster-issuer: letsencrypt
+          cert-manager.io/cluster-issuer: letsencrypt-staging
         hosts:
           - host: data-access.workshop.eoepca.org
         tls:
@@ -358,7 +358,7 @@ spec:
             kubernetes.io/tls-acme: "true"
             nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
             nginx.ingress.kubernetes.io/enable-cors: "true"
-            cert-manager.io/cluster-issuer: letsencrypt
+            cert-manager.io/cluster-issuer: letsencrypt-staging
           hosts:
             - host: data-access.workshop.eoepca.org
           tls:
@@ -470,7 +470,7 @@ spec:
             kubernetes.io/tls-acme: "true"
             nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
             nginx.ingress.kubernetes.io/enable-cors: "true"
-            cert-manager.io/cluster-issuer: letsencrypt
+            cert-manager.io/cluster-issuer: letsencrypt-staging
           hosts:
             - host: data-access.workshop.eoepca.org
           tls:
