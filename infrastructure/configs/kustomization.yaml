@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
 - letsencrypt.yaml
 - minio-credentials.yaml
+- harbor-credentials.yaml
