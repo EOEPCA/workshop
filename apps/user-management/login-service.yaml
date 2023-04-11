@@ -45,7 +45,7 @@ spec:
     nginx:
       ingress:
         annotations:
-          cert-manager.io/cluster-issuer: letsencrypt-production
+          cert-manager.io/cluster-issuer: letsencrypt-staging
         hosts:
           - auth.workshop.eoepca.org
         tls:
