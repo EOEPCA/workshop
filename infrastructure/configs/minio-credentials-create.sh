@@ -20,13 +20,10 @@ randomCharacters() {
   tr -dc 'A-Za-z0-9!#%&*@^_-' </dev/urandom | head -c $length  ; echo
 }
 
-ROOT_USER="${1:-admin}"
-ROOT_PWD=$(randomCharacters 64)
-
 secretYaml() {
   kubectl -n "${1}" create secret generic "${SECRET_NAME}" \
-    --from-literal="root-user=$ROOT_USER" \
-    --from-literal="root-password=$ROOT_PWD" \
+    --from-literal="root-user=admin" \
+    --from-literal="root-password=$(randomCharacters 64)" \
     --dry-run=client -o yaml
 }
 
