@@ -1,0 +1,43 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: resource-catalogue
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: rm-resource-catalogue
+      version: 1.2.2
+      sourceRef:
+        kind: HelmRepository
+        name: eoepca
+        namespace: eoepca-system
+  values:
+    global:
+      namespace: "{{ workspace_name }}"
+    db:
+      volume_storage_type: managed-nfs-storage-retain
+    ingress:
+      ingress:
+      enabled: true
+      name: resource-catalogue
+      host: resource-catalogue.{{ workspace_name }}.workshop.eoepca.org
+      tls_host: resource-catalogue.{{ workspace_name }}.workshop.eoepca.org
+      tls_secret_name: resource-catalogue-{{ workspace_name }}-tls
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+    pycsw:
+      image:
+        pullPolicy: Always
+      config:
+        server:
+          url: "https://resource-catalogue.{{ workspace_name }}.workshop.eoepca.org"
+        metadata:
+          identification_title: Resource Catalogue - {{ workspace_name }}
+          identification_abstract: Based on pycsw, a Python OGC CSW server implementation
+          identification_keywords: catalogue,discovery,metadata
+          identification_keywords_type: theme
+          identification_fees: None
+          identification_accessconstraints: None
+          provider_name: EOEPCA
+          provider_url: https://eoepca.org/
