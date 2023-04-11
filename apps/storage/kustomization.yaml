@@ -4,3 +4,4 @@ resources:
 - nfs-provisioner.yaml
 - minio.yaml
 - storage.yaml
+- harbor.yaml
