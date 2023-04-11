@@ -15,6 +15,7 @@ metadata:
   namespace: eoepca-storage
 spec:
   interval: 10m
+  timeout: 15m
   chart:
     spec:
       chart: harbor
@@ -48,7 +49,8 @@ spec:
         chartmuseum:
           storageClass: managed-nfs-storage
         jobservice:
-          storageClass: managed-nfs-storage
+          jobLog:
+            storageClass: managed-nfs-storage
         database:
           storageClass: managed-nfs-storage
         redis:
@@ -67,4 +69,3 @@ spec:
       enabled: false
     notary:
       enabled: false
-
