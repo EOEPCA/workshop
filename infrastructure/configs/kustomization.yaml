@@ -4,3 +4,4 @@ resources:
 - letsencrypt.yaml
 - minio-credentials.yaml
 - harbor-credentials.yaml
+- login-service-credentials.yaml
