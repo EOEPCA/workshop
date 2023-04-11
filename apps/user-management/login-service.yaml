@@ -49,8 +49,9 @@ spec:
         hosts:
           - auth.workshop.eoepca.org
         tls:
-          - hosts:
-              - auth.workshop.eoepca.org
-            secretName: login-service-tls
+        - secretName: login-service-tls
+          hosts:
+            - auth.workshop.eoepca.org
+            
   timeout: 25m0s
   interval: 1m0s
