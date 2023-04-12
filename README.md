@@ -41,13 +41,20 @@ The order of deployment for `./configuration`, `./infrastructure` and `./apps` i
 
 This deployment order is controlled using [Kustomizations](https://fluxcd.io/flux/components/kustomize/kustomization/), an example for which is demonstrated with the Mundi pipeline `./clusters/mundi/pipeline.yaml`
 
-In order to deploy for a different system, at a mimimum a new directory `./clusters/<target system>` should be created as a copy from the Mundi deployment, with its configuration file `./clusters/<target system>/eoepca-configuration.yaml` modified to reflect the values for the new cluster (e.g. publicIp)
+In order to deploy for a different system, at a mimimum a new directory `./clusters/<target system>` should be created as a copy from the Mundi deployment, with:
+- its configuration file `./clusters/<target system>/eoepca-configuration.yaml` modified to reflect the values for the new cluster (e.g. publicIp)
+- any paths in `./clusters/<target system>/pipeline.yaml` updated as neccessary to point to system-specific resource definitions.
 
 ### Initialise the EOEPCA Deployment in Flux
 
 The [deployment script](./deploy-to-cluster) bootstraps Flux in to the currently active Kubernetes cluster. Run `./deploy-to-cluster -h` for a full breakdown of the usage of this script.
 
 NOTE. For deployment of additional clusters it is essential to make a copy of the `clusters/<target system>` directory, to ensure that the cluster deployment configuration that flux maintains in GitHub is kept independent for each cluster.
+
+### (Re)generate secrets
+
+After deployment of the sealed secrets controller, sealed secrets must be (re)generated using the certificate associated with the controller.
+The resources for these secrets are stored in `./infrastructure/configs/<target system>`. The mundi deployment contains helper scripts which can be executed to generate the resources for these secrets. Once (re)generated, these must be committed to GIT and deployed via flux for resources depending on the secrets to deploy successfully.
 
 ## GitOps Synchronisation
 
