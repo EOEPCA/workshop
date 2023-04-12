@@ -22,14 +22,7 @@ flux check --pre
 
 GitHub is assumed for these instructions, as used by the [deployment script](./deploy-to-cluster), but other git repos can be used - as described here (https://toolkit.fluxcd.io/guides/installation/#generic-git-server).
 
-The following environment variables must be set when initialising Flux in the following step...
-
-```
-export GITHUB_USER=<your-username>
-export GITHUB_TOKEN=<your-token>
-```
-
-GITHUB_TOKEN is a Personal Access Token - as described here (https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token).
+A Personal Access Token (PAT) will be required by Flux, these can be created as described here (https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token).
 
 When creating the token, all 'repo' scopes should be selected.
 
