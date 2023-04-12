@@ -43,12 +43,6 @@ spec:
           cert-manager.io/cluster-issuer: ${certificateIssuer}
           nginx.ingress.kubernetes.io/proxy-read-timeout: '600'
 
-          # from chart:
-          ingress.kubernetes.io/ssl-redirect: "true"
-          ingress.kubernetes.io/proxy-body-size: "0"
-          nginx.ingress.kubernetes.io/ssl-redirect: "true"
-          nginx.ingress.kubernetes.io/proxy-body-size: "0"
-
         hosts:
           core: harbor.${domain}
           notary: harbor-notary.${domain}
