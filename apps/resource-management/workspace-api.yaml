@@ -25,19 +25,19 @@ spec:
       
     ingress:
       hosts:
-        - host: workspace-api.workspace.eoepca.org
+        - host: workspace-api.${domain}
           paths: ["/"]
       tls:
         - hosts:
-            - workspace-api.workspace.eoepca.org
+            - workspace-api.${domain}
           secretName: workspace-api-tls
 
     prefixForName: "develop-user"
     workspaceSecretName: "bucket"
     namespaceForBucketResource: "rm"
-    s3Endpoint: "https://minio.workspace.eoepca.org"
+    s3Endpoint: "https://minio.${domain}"
     s3Region: "us-east-1"
-    harborUrl: "https://harbor.workspace.eoepca.org"
+    harborUrl: "https://harbor.${domain}"
     harborUsername: "admin"
     umaClientSecretName: "rm-uma-user-agent"
     umaClientSecretNamespace: "rm"
