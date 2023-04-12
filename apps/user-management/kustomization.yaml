@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
 - login-service.yaml
 - user-profile.yaml
-# - policy-decision-point.yaml
+- policy-decision-point.yaml
