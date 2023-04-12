@@ -13,7 +13,6 @@ trap onExit EXIT
 APP_NAME="harbor"
 CREDS_FILE="${APP_NAME}-credentials.yaml"
 SECRET_NAME="${APP_NAME}-credentials"
-NAMESPACE="eoepca-storage"
 
 randomCharacters() {
   length=$1
@@ -32,7 +31,6 @@ do
   echo --- >> ${CREDS_FILE}
   # Create Secret and then pipe to kubeseal to create the SealedSecret
   secretYaml ${namespaceRequiringCreds} | kubeseal -o yaml \
-    --namespace=${NAMESPACE} \
     --controller-name sealed-secrets-controller \
     --controller-namespace eoepca-system >> ${CREDS_FILE}
 done
