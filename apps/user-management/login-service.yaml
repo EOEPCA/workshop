@@ -53,5 +53,5 @@ spec:
           hosts:
             - auth.workshop.eoepca.org
             
-  timeout: 25m0s
+  timeout: 1h
   interval: 1m0s
