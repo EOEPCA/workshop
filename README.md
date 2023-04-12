@@ -28,9 +28,23 @@ When creating the token, all 'repo' scopes should be selected.
 
 ### Prepare the deployment TARGET
 
-The deplyoments for each system are maitained under the paths `./clusters/<target system>`. Before deployment, the confiuration must be tailored to your deployment environment. In particular the Public IP of the target cluster must be applied within the configuration - achieved by searching for the terms `185.52.193.87` and `185.52.193.87.nip.io` in the configuration (all files under clusters/develop) and adjusting according to your environment.
+The repository structure is separated in to the following areas:
+- apps: containing the core eoepca applications to deploy
+- clusters: containing the (FluxCD) deployments for each cluster
+- configuration: containing cluster-wide configuration (e.g. IP addresses, domain names)
+- infrastructure: containing the pre-requisite infrastructure components and configuration required by the apps (e.g. CRDs, NGINX, certificates)
 
-Rather than edit `<target system>` directly, you may consider making a copy of the directory to represent your cluster.
+The order of deployment for `./configuration`, `./infrastructure` and `./apps` is controlled by the FluxCD configuration in `./clusters/<target system>`, however the general expected order is:
+1. bootstrap flux for the corresponding cluster in `./clusters`
+2. deploy system-wide configuration from `./configuration`
+3. deploy pre-requisite infrastructure from `./infrastructure`
+4. deploy eoepca applications from `./apps`
+
+This deployment order is controlled using [Kustomizations](https://fluxcd.io/flux/components/kustomize/kustomization/), an example for which is demonstrated with the Mundi pipeline `./clusters/mundi/pipeline.yaml`
+
+In order to deploy for a different system, at a mimimum:
+- a new set of configuration files should be created in `./configuration/<target system>`, with configuration values set according to the target system (e.g. publicIp)
+- a new directory `./clusters/<target system>` should be created, with its own pipeline file configured to use the configuration from `./configuration/<target system>`
 
 ### Initialise the EOEPCA Deployment in Flux
 
@@ -40,7 +54,7 @@ NOTE. For deployment of additional clusters it is essential to make a copy of th
 
 ## GitOps Synchronisation
 
-The flux deployment specification in `clusters/<target system>` is expressed through `GitRepository` and `HelmRelease` resources.
+The flux deployment specification is expressed through `GitRepository` and `HelmRelease` resources.
 
 Flux will monitor the charts referenced in the Helm Releases, and reconcile the state of the cluster in accordance with any changes to these components.
 
