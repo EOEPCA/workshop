@@ -83,5 +83,5 @@ spec:
       maincfgtpl: "files/main.cfg.tpl"
 
     # values - end
-  # timeout: 25m0s
+  timeout: 15m0s
   interval: 1m0s
