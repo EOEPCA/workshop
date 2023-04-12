@@ -24,9 +24,17 @@ spec:
         kind: HelmRepository
         name: harbor
         namespace: eoepca-storage
+  valuesFrom:
+    - kind: Secret
+      name: harbor-credentials
+      valuesKey: password
+      targetPath: harborAdminPassword
+
   values:
     imagePullSecrets:
       - name: regcred
+
+    externalURL: https://harbor.${domain}
 
     expose:
       ingress:
@@ -60,11 +68,6 @@ spec:
           storageClass: ${systemStorageClass}
         trivy:
           storageClass: ${systemStorageClass}
-
-    externalURL: https://harbor.${domain}
-    # initial password for logging in with user "admin"
-    existingSecretAdminPassword: "harbor-credentials"
-    existingSecretAdminPasswordKey: "password"
 
     chartmuseum:
       enabled: false
