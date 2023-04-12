@@ -45,7 +45,7 @@ spec:
     nginx:
       ingress:
         annotations:
-          cert-manager.io/cluster-issuer: letsencrypt-staging
+          cert-manager.io/cluster-issuer: ${certificateIssuer}
         hosts:
           - auth.${domain}
         tls:

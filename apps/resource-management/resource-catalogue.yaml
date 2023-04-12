@@ -26,7 +26,7 @@ spec:
       tls_host: resource-catalogue.${domain}
       tls_secret_name: resource-catalogue-tls
       annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-staging
+        cert-manager.io/cluster-issuer: ${certificateIssuer}
     pycsw:
       image:
         pullPolicy: Always

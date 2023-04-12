@@ -34,7 +34,7 @@ spec:
       hostname: console.minio.${domain}
       ingressClassName: nginx
       annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-staging
+        cert-manager.io/cluster-issuer: ${certificateIssuer}
       tls:
         - secretName: minio-console-tls
           hosts:
@@ -45,7 +45,7 @@ spec:
       hostname: minio.${domain}
       ingressClassName: nginx
       annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-staging
+        cert-manager.io/cluster-issuer: ${certificateIssuer}
       tls:
         - secretName: minio-tls
           hosts:
