@@ -41,10 +41,10 @@ spec:
           nginx.ingress.kubernetes.io/enable-cors: "true"
           cert-manager.io/cluster-issuer: letsencrypt-staging
         hosts:
-          - host: data-access.workshop.eoepca.org
+          - host: data-access.${domain}
         tls:
           - hosts:
-              - data-access.workshop.eoepca.org
+              - data-access.${domain}
             secretName: data-access-tls
 
       storage:
@@ -59,8 +59,8 @@ spec:
         cache:
           type: S3
           bucket: cache-bucket
-          endpoint_url: "http://minio.workshop.eoepca.org/cache-bucket"
-          host: "minio.workshop.eoepca.org"
+          endpoint_url: "http://minio.${domain}/cache-bucket"
+          host: "minio.${domain}"
           region: us-east-1
           region_name: us-east-1
 
@@ -68,7 +68,7 @@ spec:
         title: EOEPCA Data Access Service developed by EOX
         abstract: EOEPCA Data Access Service developed by EOX
         header: "EOEPCA Data Access View Server (VS) Client powered by <a href=\"//eox.at\"><img src=\"//eox.at/wp-content/uploads/2017/09/EOX_Logo.svg\" alt=\"EOX\" style=\"height:25px;margin-left:10px\"/></a>"
-        url: https://data-access.workshop.eoepca.org/ows
+        url: https://data-access.${domain}/ows
 
       layers:
         - id: S2L1C
@@ -360,10 +360,10 @@ spec:
             nginx.ingress.kubernetes.io/enable-cors: "true"
             cert-manager.io/cluster-issuer: letsencrypt-staging
           hosts:
-            - host: data-access.workshop.eoepca.org
+            - host: data-access.${domain}
           tls:
             - hosts:
-                - data-access.workshop.eoepca.org
+                - data-access.${domain}
               secretName: data-access-tls
 
       registrar:
@@ -377,7 +377,7 @@ spec:
             - path: registrar_pycsw.backend.ItemBackend
               kwargs:
                 repository_database_uri: postgresql://postgres:mypass@resource-catalogue-db/pycsw
-                ows_url: https://data-access.workshop.eoepca.org/ows
+                ows_url: https://data-access.${domain}/ows
           defaultSuccessQueue: seed_queue
 
           routes:
@@ -472,10 +472,10 @@ spec:
             nginx.ingress.kubernetes.io/enable-cors: "true"
             cert-manager.io/cluster-issuer: letsencrypt-staging
           hosts:
-            - host: data-access.workshop.eoepca.org
+            - host: data-access.${domain}
           tls:
             - hosts:
-                - data-access.workshop.eoepca.org
+                - data-access.${domain}
               secretName: data-access-tls
         config:
           eoxserverDownloadEnabled: true
@@ -501,7 +501,7 @@ metadata:
     k8s-app: data-access
     name: data-access
 spec:
-  storageClassName: managed-nfs-storage
+  storageClassName: ${systemStorageClass}
   accessModes:
     - ReadWriteMany
   resources:
@@ -517,7 +517,7 @@ metadata:
     k8s-app: data-access
     name: data-access
 spec:
-  storageClassName: managed-nfs-storage
+  storageClassName: ${systemStorageClass}
   accessModes:
     - ReadWriteMany
   resources:

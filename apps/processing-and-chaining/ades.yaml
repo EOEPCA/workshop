@@ -33,17 +33,17 @@ spec:
         nginx.ingress.kubernetes.io/ssl-redirect: "false"
         cert-manager.io/cluster-issuer: letsencrypt-staging
       hosts:
-        - host: ades.workshop.eoepca.org
+        - host: ades.${domain}
           paths:
             - path: /
               pathType: ImplementationSpecific    
       tls:
         - hosts:
-            - ades.workshop.eoepca.org
+            - ades.${domain}
           secretName: ades-tls
     
     persistence:
-      storageClass: "managed-nfs-storage"
+      storageClass: "${systemStorageClass}"
 
     workflowExecutor:
       inputs:
@@ -54,7 +54,7 @@ spec:
         STAGEIN_AWS_SECRET_ACCESS_KEY: test
         STAGEIN_AWS_REGION: RegioneOne
 
-        STAGEOUT_AWS_SERVICEURL: http://minio.workshop.eoepca.org
+        STAGEOUT_AWS_SERVICEURL: http://minio.${domain}
         STAGEOUT_AWS_REGION: us-east-1
         STAGEOUT_OUTPUT: s3://eoepca
         # Loaded from Secrets
@@ -64,10 +64,10 @@ spec:
       # Enable if integrating with workspace for stageout
       # useResourceManager: "true"
       # resourceManagerWorkspacePrefix: "develop-user"
-      # resourceManagerEndpoint: "https://workspace-api.workshop.eoepca.org"
-      # platformDomain: "https://auth.workshop.eoepca.org"
+      # resourceManagerEndpoint: "https://workspace-api.${domain}"
+      # platformDomain: "https://auth.${domain}"
 
-      processingStorageClass: managed-nfs-storage
+      processingStorageClass: ${systemStorageClass}
       processingVolumeTmpSize: "6Gi"
       processingVolumeOutputSize: "6Gi"
       processingMaxRam: "8Gi"

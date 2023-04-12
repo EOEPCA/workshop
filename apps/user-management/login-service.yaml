@@ -23,14 +23,14 @@ spec:
       targetPath: config.ldapPass
   values:
     global:
-      domain: auth.workshop.eoepca.org
-      nginxIp: 80.158.54.66
+      domain: auth.${domain}
+      nginxIp: ${publicIp}
       namespace: um
     volumeClaim:
       name: eoepca-userman-pvc
       create: false
     config:
-      domain: auth.workshop.eoepca.org
+      domain: auth.${domain}
       volumeClaim:
         name: eoepca-userman-pvc
     opendj:
@@ -47,11 +47,11 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-staging
         hosts:
-          - auth.workshop.eoepca.org
+          - auth.${domain}
         tls:
         - secretName: login-service-tls
           hosts:
-            - auth.workshop.eoepca.org
+            - auth.${domain}
             
   timeout: 1h
   interval: 1m0s

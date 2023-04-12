@@ -39,26 +39,26 @@ spec:
           nginx.ingress.kubernetes.io/proxy-body-size: "0"
 
         hosts:
-          core: harbor.workshop.eoepca.org
-          notary: harbor-notary.workshop.eoepca.org
+          core: harbor.${domain}
+          notary: harbor-notary.${domain}
 
     persistence:
       persistentVolumeClaim:
         registry:
-          storageClass: managed-nfs-storage
+          storageClass: ${systemStorageClass}
         chartmuseum:
-          storageClass: managed-nfs-storage
+          storageClass: ${systemStorageClass}
         jobservice:
           jobLog:
-            storageClass: managed-nfs-storage
+            storageClass: ${systemStorageClass}
         database:
-          storageClass: managed-nfs-storage
+          storageClass: ${systemStorageClass}
         redis:
-          storageClass: managed-nfs-storage
+          storageClass: ${systemStorageClass}
         trivy:
-          storageClass: managed-nfs-storage
+          storageClass: ${systemStorageClass}
 
-    externalURL: https://harbor.workshop.eoepca.org
+    externalURL: https://harbor.${domain}
     # initial password for logging in with user "admin"
     existingSecretAdminPassword: "harbor-credentials"
     existingSecretAdminPasswordKey: "password"

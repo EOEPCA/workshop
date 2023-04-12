@@ -29,6 +29,6 @@ spec:
       ingressClassResource:
         default: true
       service:
-        loadBalancerIP: 80.158.54.66
+        loadBalancerIP: ${publicIp}
       publishService:
         enabled: false

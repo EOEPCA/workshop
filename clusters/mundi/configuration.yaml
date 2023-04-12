@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: eoepca-configuration
+data:
+  publicIp: 80.158.54.66
+  domain: workshop.eoepca.org
+  systemStorageClass: managed-nfs-storage
+  nfsServerIp: 192.168.0.222

@@ -24,7 +24,7 @@ spec:
   values:
     provisionerName: nfs-storage
     storageClass:
-      name: managed-nfs-storage
+      name: ${systemStorageClass}
       create: true
       reclaimPolicy: Delete
       archiveOnDelete: false
@@ -32,7 +32,7 @@ spec:
     nfs:
       # It should be ensured that the cluster can access this server 
       # Check route tables, cloud security groups e.t.c associated with this server
-      server: "192.168.0.222"
+      server: "${nfsServerIp}"
       path: /data/dynamic
   timeout: 15m
   interval: 30m0s
@@ -54,14 +54,14 @@ spec:
   values:
     provisionerName: nfs-storage-retain
     storageClass:
-      name: managed-nfs-storage-retain
+      name: ${systemStorageClass}-retain
       create: true
       reclaimPolicy: Retain
       allowVolumeExpansion: true
     nfs:
       # It should be ensured that the cluster can access this server 
       # Check route tables, cloud security groups e.t.c associated with this server
-      server: "192.168.0.222"
+      server: "${nfsServerIp}"
       path: /data/dynamic
   timeout: 15m
   interval: 30m0s

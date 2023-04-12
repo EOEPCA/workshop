@@ -14,8 +14,8 @@ spec:
         namespace: eoepca-system
   values:
     global:
-      domain: auth.workshop.eoepca.org
-      nginxIp: 80.158.54.66
+      domain: auth.${domain}
+      nginxIp: ${publicIp}
     volumeClaim:
       name: eoepca-userman-pvc
       create: false

@@ -27,28 +27,28 @@ spec:
       existingSecret: minio-credentials
 
     persistence:
-      storageClass: managed-nfs-storage-retain
+      storageClass: ${systemStorageClass}-retain
 
     ingress:
       enabled: true
-      hostname: console.minio.workshop.eoepca.org
+      hostname: console.minio.${domain}
       ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-staging
       tls:
         - secretName: minio-console-tls
           hosts:
-            - console.minio.workshop.eoepca.org
+            - console.minio.${domain}
 
     apiIngress:
       enabled: true
-      hostname: minio.workshop.eoepca.org
+      hostname: minio.${domain}
       ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-staging
       tls:
         - secretName: minio-tls
           hosts:
-            - minio.workshop.eoepca.org
+            - minio.${domain}
 
     defaultBuckets: "eoepca, cache-bucket"
