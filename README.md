@@ -30,7 +30,8 @@ When creating the token, all 'repo' scopes should be selected.
 
 The repository structure is separated in to the following areas:
 - apps: containing the core eoepca applications to deploy
-- clusters: containing the configuration and (FluxCD) deployments for each cluster
+- clusters: containing the (FluxCD) deployments for each cluster
+- configuration: containing cluster-wide configuration (e.g. IP addresses, domain names)
 - infrastructure: containing the pre-requisite infrastructure components and configuration required by the apps (e.g. CRDs, NGINX, certificates)
 
 The order of deployment for `./configuration`, `./infrastructure` and `./apps` is controlled by the FluxCD configuration in `./clusters/<target system>`, however the general expected order is:
@@ -41,7 +42,9 @@ The order of deployment for `./configuration`, `./infrastructure` and `./apps` i
 
 This deployment order is controlled using [Kustomizations](https://fluxcd.io/flux/components/kustomize/kustomization/), an example for which is demonstrated with the Mundi pipeline `./clusters/mundi/pipeline.yaml`
 
-In order to deploy for a different system, at a mimimum a new directory `./clusters/<target system>` should be created as a copy from the Mundi deployment, with its configuration file `./clusters/<target system>/eoepca-configuration.yaml` modified to reflect the values for the new cluster (e.g. publicIp)
+In order to deploy for a different system, at a mimimum:
+- a new set of configuration files should be created in `./configuration/<target system>`, with configuration values set according to the target system (e.g. publicIp)
+- a new directory `./clusters/<target system>` should be created, with its own pipeline file configured to use the configuration from `./configuration/<target system>`
 
 ### Initialise the EOEPCA Deployment in Flux
 
