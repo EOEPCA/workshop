@@ -19,5 +19,5 @@ spec:
     volumeClaim:
       name: eoepca-userman-pvc
       create: false
-  timeout: 1h
+  timeout: 25m0s
   interval: 1m0s

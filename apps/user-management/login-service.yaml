@@ -53,5 +53,5 @@ spec:
           hosts:
             - auth.${domain}
             
-  timeout: 1h
+  timeout: 25m0s
   interval: 1m0s
