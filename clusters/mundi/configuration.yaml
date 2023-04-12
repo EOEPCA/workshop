@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: eoepca-configuration
+  namespace: flux-system
 data:
   publicIp: 80.158.54.66
   domain: workshop.eoepca.org
