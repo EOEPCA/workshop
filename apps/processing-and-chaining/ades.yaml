@@ -22,6 +22,8 @@ spec:
       valuesKey: root-password
       targetPath: workflowExecutor.inputs.STAGEOUT_AWS_SECRET_ACCESS_KEY
   values:
+    imagePullSecrets:
+      - name: regcred
     replicaCount: 1
     image:
       pullPolicy: Always
@@ -46,6 +48,8 @@ spec:
       storageClass: "${systemStorageClass}"
 
     workflowExecutor:
+      imagePullSecrets:
+        - name: regcred
       inputs:
         APP: ades
 

@@ -23,6 +23,9 @@ spec:
         name: minio
         namespace: eoepca-storage
   values:
+    imagePullSecrets:
+      - name: regcred
+
     auth:
       existingSecret: minio-credentials
 

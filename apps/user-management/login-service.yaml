@@ -22,6 +22,8 @@ spec:
       valuesKey: ldapPass
       targetPath: config.ldapPass
   values:
+    imagePullSecrets:
+      - name: regcred
     global:
       domain: auth.${domain}
       nginxIp: ${publicIp}

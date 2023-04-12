@@ -23,6 +23,8 @@ spec:
         namespace: eoepca-system
   interval: 5m
   values:
+    imagePullSecrets:
+      - name: regcred
     controller:
       # useful for migration of 'old' (pre k8s v1.22) Ingress definitions
       watchIngressWithoutClass: true

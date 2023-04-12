@@ -20,7 +20,9 @@ spec:
       targetPath: harborPassword
   values:
     fullnameOverride: workspace-api
-
+    imagePullSecrets:
+      - name: regcred
+      
     ingress:
       hosts:
         - host: workspace-api.workspace.eoepca.org

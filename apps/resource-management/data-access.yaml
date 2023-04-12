@@ -26,6 +26,8 @@ spec:
       targetPath: global.storage.cache.secret_access_key
 
   values:
+    imagePullSecrets:
+      - name: regcred
     global:
       env:
         REGISTRAR_REPLACE: "true"

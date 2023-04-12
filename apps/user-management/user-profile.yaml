@@ -13,6 +13,8 @@ spec:
         name: eoepca
         namespace: eoepca-system
   values:
+    imagePullSecrets:
+      - name: regcred
     global:
       domain: auth.${domain}
       nginxIp: ${publicIp}

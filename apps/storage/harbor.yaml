@@ -25,6 +25,9 @@ spec:
         name: harbor
         namespace: eoepca-storage
   values:
+    imagePullSecrets:
+      - name: regcred
+
     expose:
       ingress:
         annotations:
