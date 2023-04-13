@@ -1,0 +1,7 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ades-client-credentials.yaml
+- data-access-client-credentials.yaml
+- resource-catalogue-client-credentials.yaml
+- workspace-api-client-credentials.yaml
