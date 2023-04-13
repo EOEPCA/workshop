@@ -3,7 +3,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
   name: infra-controllers
-  namespace: flux-system
+  namespace: eoepca-system
 spec:
   interval: 1h
   retryInterval: 1m
@@ -23,7 +23,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
   name: infra-configs
-  namespace: flux-system
+  namespace: eoepca-system
 spec:
   dependsOn:
     - name: infra-controllers
@@ -45,7 +45,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
   name: apps
-  namespace: flux-system
+  namespace: eoepca-system
 spec:
   dependsOn:
     - name: infra-configs
