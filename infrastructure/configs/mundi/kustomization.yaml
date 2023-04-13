@@ -6,3 +6,4 @@ resources:
 - minio-credentials.yaml
 - harbor-credentials.yaml
 - login-service-credentials.yaml
+- clients/
