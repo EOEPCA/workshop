@@ -6,4 +6,4 @@ resources:
 - resource-management/
 - processing-and-chaining/
 - user-management/
-- protection/
+# - protection/
