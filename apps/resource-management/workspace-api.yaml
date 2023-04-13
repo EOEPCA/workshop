@@ -18,7 +18,8 @@ spec:
     fullnameOverride: workspace-api
     imagePullSecrets:
       - name: regcred
-      
+    image:
+      pullPolicy: Always
     ingress:
       hosts:
         - host: workspace-api.${domain}
