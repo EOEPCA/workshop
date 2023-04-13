@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
 - ades.yaml
 - development-environment.yaml
+- portal.yaml

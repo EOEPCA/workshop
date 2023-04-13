@@ -6,3 +6,4 @@ resources:
 - resource-catalogue-client-credentials.yaml
 - workspace-api-client-credentials.yaml
 - jupyterhub-client-credentials.yaml
+- django-client-credentials.yaml
