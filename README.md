@@ -56,6 +56,8 @@ NOTE. For deployment of additional clusters it is essential to make a copy of th
 After deployment of the sealed secrets controller, sealed secrets must be (re)generated using the certificate associated with the controller.
 The resources for these secrets are stored in `./infrastructure/configs/<target system>`. The mundi deployment contains helper scripts which can be executed to generate the resources for these secrets. Once (re)generated, these must be committed to GIT and deployed via flux for resources depending on the secrets to deploy successfully.
 
+See (https://github.com/bitnami-labs/sealed-secrets) for more information on sealed secrets.
+
 ## GitOps Synchronisation
 
 The flux deployment specification is expressed through `GitRepository` and `HelmRelease` resources.
