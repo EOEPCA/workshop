@@ -41,7 +41,7 @@ spec:
     s3Region: "us-east-1"
     harborUrl: "https://harbor.${domain}"
     harborUsername: "admin"
-    umaClientSecretName: "rm-uma-user-agent"
+    umaClientSecretName: "workspace-api-uma-user-agent"
     umaClientSecretNamespace: "rm"
     workspaceChartsConfigMap: "workspace-charts"
     bucketEndpointUrl: "http://minio-bucket-api:8080/bucket"
