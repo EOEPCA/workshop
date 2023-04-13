@@ -5,3 +5,4 @@ resources:
 - data-access-client-credentials.yaml
 - resource-catalogue-client-credentials.yaml
 - workspace-api-client-credentials.yaml
+- jupyterhub-client-credentials.yaml
