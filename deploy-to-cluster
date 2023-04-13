@@ -11,7 +11,7 @@ trap onExit EXIT
 
 usage() {
   echo "Usage:"
-  echo "./deploy-to-cluster [options]"
+  echo "./$(basename $0) [options]"
   echo " "
   echo "options                          | Required | Default            | Description"
   echo "-h, --help                       | false    | N/A                | Show this description"
