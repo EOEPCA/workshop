@@ -67,6 +67,8 @@ processArgs() {
     esac
     shift
   done
+
+  validateArgs
 }
 
 validateArgs() {
@@ -93,7 +95,6 @@ validateArgs() {
 }
 
 processArgs $@
-validateArgs
 
 flux bootstrap github \
   --owner="${owner}" \
