@@ -11,6 +11,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
+    namespace: flux-system
   path: "./infrastructure/controllers/mundi"
   postBuild:
     substituteFrom:
@@ -33,6 +34,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
+    namespace: flux-system
   path: "./infrastructure/configs/mundi"
   postBuild:
     substituteFrom:
@@ -55,6 +57,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
+    namespace: flux-system
   path: "./apps"
   postBuild:
     substituteFrom:
