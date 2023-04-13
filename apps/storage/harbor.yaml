@@ -24,6 +24,9 @@ spec:
         kind: HelmRepository
         name: harbor
         namespace: eoepca-storage
+  dependsOn:
+    - name: nfs-provisioner
+
   valuesFrom:
     - kind: Secret
       name: harbor-credentials

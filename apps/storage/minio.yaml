@@ -22,6 +22,9 @@ spec:
         kind: HelmRepository
         name: minio
         namespace: eoepca-storage
+  dependsOn:
+    - name: nfs-provisioner-retain
+    
   values:
     imagePullSecrets:
       - name: regcred

@@ -12,6 +12,12 @@ spec:
         kind: HelmRepository
         name: eoepca
         namespace: eoepca-system
+  dependsOn:
+    - name: nfs-provisioner
+      namespace: eoepca-storage
+    - name: minio
+      namespace: eoepca-storage
+
   valuesFrom:
     - kind: Secret
       name: minio-credentials

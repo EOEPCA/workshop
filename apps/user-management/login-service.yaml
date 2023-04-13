@@ -12,6 +12,9 @@ spec:
         kind: HelmRepository
         name: eoepca
         namespace: eoepca-system
+  dependsOn:
+    - name: storage
+      namespace: eoepca-storage
   valuesFrom:
     - kind: Secret
       name: login-service-credentials

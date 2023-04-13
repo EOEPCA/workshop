@@ -12,6 +12,8 @@ spec:
         kind: HelmRepository
         name: eoepca
         namespace: eoepca-system
+  dependsOn:
+    - name: login-service
   values:
     imagePullSecrets:
       - name: regcred
