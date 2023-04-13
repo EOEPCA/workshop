@@ -14,6 +14,11 @@ spec:
         kind: HelmRepository
         name: eoepca
         namespace: eoepca-system
+  valuesFrom:
+    - kind: Secret
+      name: harbor-credentials
+      valuesKey: password
+      targetPath: harborPassword
   values:
     fullnameOverride: workspace-api
     imagePullSecrets:
