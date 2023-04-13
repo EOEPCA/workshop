@@ -13,6 +13,11 @@ spec:
         kind: HelmRepository
         name: eoepca
         namespace: eoepca-system
+  dependsOn:
+    - name: nfs-provisioner
+      namespace: eoepca-storage
+    - name: login-service
+      namespace: um
   timeout: 15m0s
   interval: 5m0s
   values:
