@@ -5,9 +5,8 @@ metadata:
   name: infra-controllers
   namespace: eoepca-system
 spec:
-  interval: 1h
+  interval: 10m
   retryInterval: 1m
-  timeout: 15m
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -28,9 +27,7 @@ metadata:
 spec:
   dependsOn:
     - name: infra-controllers
-  interval: 1h
-  retryInterval: 1m
-  timeout: 15m
+  interval: 5m
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -51,9 +48,8 @@ metadata:
 spec:
   dependsOn:
     - name: infra-configs
-  interval: 1h
+  interval: 30m
   retryInterval: 1m
-  timeout: 15m
   sourceRef:
     kind: GitRepository
     name: flux-system
