@@ -29,15 +29,16 @@ The repository structure is separated in to the following areas:
 - clusters: containing the configuration and (FluxCD) deployments for each cluster
 - infrastructure: containing the pre-requisite infrastructure components and configuration required by the apps (e.g. CRDs, NGINX, certificates)
 
-The order of deployment for `./configuration`, `./infrastructure` and `./apps` is controlled by the FluxCD configuration in `./clusters/<target system>`, however the general expected order is:
+The order of deployment for `./clusters`, `./infrastructure` and `./apps` is controlled by the FluxCD configuration in `./clusters/<target system>`, however the general expected order is:
 1. bootstrap flux for the corresponding cluster in `./clusters`
-2. deploy system-wide configuration from `./configuration`
+2. deploy system-wide configuration from `./clusters/<target system>`
 3. deploy pre-requisite infrastructure from `./infrastructure`
 4. deploy eoepca applications from `./apps`
 
 This deployment order is controlled using [Kustomizations](https://fluxcd.io/flux/components/kustomize/kustomization/), an example for which is demonstrated with the Mundi pipeline `./clusters/mundi/pipeline.yaml`
 
-In order to deploy for a different system, at a mimimum a new directory `./clusters/<target system>` should be created as a copy from the Mundi deployment, with:
+In order to deploy for a different system the following should be performed:
+- Create and bootstrap a new directory `./clusters/<target system>` should be created as a copy from the Mundi deployment, with:
 - its configuration file `./clusters/<target system>/eoepca-configuration.yaml` modified to reflect the values for the new cluster (e.g. publicIp)
 - any paths in `./clusters/<target system>/pipeline.yaml` updated as neccessary to point to system-specific resource definitions.
 

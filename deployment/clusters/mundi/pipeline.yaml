@@ -54,7 +54,7 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  path: "./deployment/apps"
+  path: "./deployment/apps/overlay/mundi"
   postBuild:
     substituteFrom:
       - kind: ConfigMap
