@@ -69,7 +69,7 @@ spec:
         STAGEOUT_OUTPUT: s3://eoepca
 
       # Enable if integrating with workspace for stageout
-      useResourceManager: "false"
+      useResourceManager: ${stageoutToWorkspace}
       resourceManagerWorkspacePrefix: ${workspaceUserPrefix}
       resourceManagerEndpoint: "https://workspace-api.${domain}"
       platformDomain: "https://auth.${domain}"
@@ -79,6 +79,8 @@ spec:
       processingVolumeOutputSize: "6Gi"
       processingMaxRam: "12Gi"
       processingMaxCores: "4"
+      processingKeepWorkspace: "false"
+      processingKeepWorkspaceIfFailed: "true"
      
     wps:
       pepBaseUrl: "http://ades-pep:5576"
