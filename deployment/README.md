@@ -39,7 +39,7 @@ This deployment order is controlled using [Kustomizations](https://fluxcd.io/flu
 
 In order to deploy for a different system the following should be performed:
 - Create and bootstrap a new directory `./clusters/<target system>` should be created as a copy from the Mundi deployment, with:
-- its configuration file `./clusters/<target system>/eoepca-configuration.yaml` modified to reflect the values for the new cluster (e.g. publicIp)
+- its configuration file `./clusters/<target system>/configuration.yaml` modified to reflect the values for the new cluster (e.g. publicIp)
 - any paths in `./clusters/<target system>/pipeline.yaml` updated as neccessary to point to system-specific resource definitions.
 
 ## Initialise the EOEPCA Deployment in Flux

@@ -1,35 +1,11 @@
 ---
 apiVersion: v1
-kind: Namespace
-metadata:
-  name: eoepca-system
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: eoepca-storage
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: um
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: proc
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: rm
----
-apiVersion: v1
 kind: ConfigMap
 metadata:
   name: eoepca-configuration
   namespace: eoepca-system
 data:
+  clusterName: mundi
   publicIp: 80.158.54.66
   domain: workshop.eoepca.org
   systemStorageClass: managed-nfs-storage
