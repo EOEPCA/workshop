@@ -17,7 +17,7 @@ usage() {
   echo "-h, --help                       | false    | N/A                | Show this description"
   echo "-r, --repo <repository name>     | true     | workshop           | The name of the repository to deploy from"
   echo "-b, --branch <repository branch> | true     | The current branch | The branch of the repository to deploy from"
-  echo "-p, --path <repository path>     | true     |                    | The path in the repository containing the deployment"
+  echo "-p, --path <repository path>     | true     |                    | The path, relative from the repository root, to sync with the cluster"
   echo "-o, --owner <repository owner>   | true     | EOEPCA             | The owner of the repository"
   echo "--personal  <true|false>         | false    | false              | If true, the owner is assumed to be a GitHub user; otherwise an org"
   echo
