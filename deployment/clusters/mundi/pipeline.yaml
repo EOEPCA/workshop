@@ -11,7 +11,7 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  path: "./deployment/infrastructure/controllers"
+  path: "./deployment/infrastructure/controllers/overlay/mundi"
   postBuild:
     substituteFrom:
       - kind: ConfigMap
