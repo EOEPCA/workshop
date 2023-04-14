@@ -80,7 +80,7 @@ spec:
       processingStorageClass: ${systemStorageClass}
       processingVolumeTmpSize: "6Gi"
       processingVolumeOutputSize: "6Gi"
-      processingMaxRam: "8Gi"
+      processingMaxRam: "12Gi"
       processingMaxCores: "4"
      
     wps:
