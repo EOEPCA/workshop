@@ -11,7 +11,7 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  path: "./infrastructure/controllers/mundi"
+  path: "./deployment/infrastructure/controllers"
   postBuild:
     substituteFrom:
       - kind: ConfigMap
@@ -32,7 +32,7 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  path: "./infrastructure/configs/mundi"
+  path: "./deployment/infrastructure/configs/mundi"
   postBuild:
     substituteFrom:
       - kind: ConfigMap
@@ -54,7 +54,7 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  path: "./apps"
+  path: "./deployment/apps"
   postBuild:
     substituteFrom:
       - kind: ConfigMap

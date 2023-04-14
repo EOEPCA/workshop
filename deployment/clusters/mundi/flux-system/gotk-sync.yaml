@@ -20,7 +20,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./clusters/mundi
+  path: ./deployment/clusters/mundi
   prune: true
   sourceRef:
     kind: GitRepository
