@@ -34,7 +34,7 @@ spec:
             - workspace-api.${domain}
           secretName: workspace-api-tls
 
-    prefixForName: "develop-user"
+    prefixForName: ${workspaceUserPrefix}
     workspaceSecretName: "bucket"
     namespaceForBucketResource: "rm"
     s3Endpoint: "https://minio.${domain}"
