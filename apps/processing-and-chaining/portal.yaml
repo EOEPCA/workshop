@@ -17,6 +17,7 @@ spec:
     domain: ${domain}
     authHost: auth
     configmap:
+      oidc_verify_ssl: "false"
       user_prefix: ${workspaceUserPrefix}
     ingress:
       annotations:
