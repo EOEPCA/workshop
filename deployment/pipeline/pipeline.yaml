@@ -12,6 +12,10 @@ spec:
     name: flux-system
     namespace: flux-system
   path: "./deployment/infrastructure/controllers/${clusterName}"
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: eoepca-configuration
   prune: true
   wait: true
 ---
@@ -29,6 +33,10 @@ spec:
     name: flux-system
     namespace: flux-system
   path: "./deployment/infrastructure/configs/${clusterName}"
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: eoepca-configuration
   prune: true
   wait: true
 ---
@@ -47,4 +55,8 @@ spec:
     name: flux-system
     namespace: flux-system
   path: "./deployment/apps/${clusterName}"
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: eoepca-configuration
   prune: true

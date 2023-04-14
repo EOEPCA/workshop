@@ -16,18 +16,5 @@ spec:
     substituteFrom:
       - kind: ConfigMap
         name: eoepca-configuration
-  patches:
-    - patch: |
-        target:
-          kind: Kustomization
-          name: "*"
-          namespace: eoepca-system
-        patch: |
-          - op: add
-            path: /spec
-            value: postBuild:
-                    substituteFrom:
-                      - kind: ConfigMap
-                        name: eoepca-configuration
   prune: true
   wait: true
