@@ -13,8 +13,7 @@ data:
   certificateIssuer: letsencrypt-staging
   workspaceUserPrefix: workshop-user
   stageoutToWorkspace: "false"
-  enableResourceProtection: "false"
-  enableResourceIngresses: "true" # can be disabled if resource protection is enabled
+  enableResourceIngresses: "true" # can be disabled if resource protection is deployed
 
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta1
