@@ -41,6 +41,7 @@ spec:
       ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: ${certificateIssuer}
+        nginx.ingress.kubernetes.io/proxy-body-size: 0m
       tls: true
 
     apiIngress:
@@ -49,6 +50,7 @@ spec:
       ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: ${certificateIssuer}
+        nginx.ingress.kubernetes.io/proxy-body-size: 0m
       tls: true
 
     defaultBuckets: "eoepca, cache-bucket"
