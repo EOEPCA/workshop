@@ -10,7 +10,7 @@ data:
   publicIp: 80.158.54.66
   nfsServerIp: 192.168.0.222
   systemStorageClass: managed-nfs-storage
-  certificateIssuer: letsencrypt-staging
+  certificateIssuer: letsencrypt-production
   workspaceUserPrefix: workshop-user
   stageoutToWorkspace: "false"
   enableResourceIngresses: "true" # can be disabled if resource protection is deployed
