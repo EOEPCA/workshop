@@ -27,10 +27,10 @@ spec:
           nginx.ingress.kubernetes.io/enable-cors: "true"
           cert-manager.io/cluster-issuer: ${certificateIssuer}
         hosts:
-          - host: data-access.subpath.${domin}
+          - host: data-access.{ workspace_name }}.${domin}
         tls:
           - hosts:
-              - data-access.subpath.${domin}
+              - data-access.{ workspace_name }}.${domin}
         prefix:
           enabled: true
           value: "{{ workspace_name }}"
@@ -63,17 +63,31 @@ spec:
 
     vs:
       renderer:
-        replicaCount: 1
+        replicaCount: 4
+        resources:
+          limits:
+            cpu: 1.5
+            memory: 3Gi
+          requests:
+            cpu: 0.5
+            memory: 1Gi
         ingress:
           enabled: ${enableResourceIngresses}
+          ingressClassName: nginx
+          annotations:
+            kubernetes.io/tls-acme: "true"
+            nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+            nginx.ingress.kubernetes.io/enable-cors: "true"
+            cert-manager.io/cluster-issuer: ${certificateIssuer}
           hosts:
-          - host: data-access.{{ workspace_name }}.${domin}
+            - host: data-access.${domain}
+          tls:
+            - hosts:
+                - data-access.${domain}
+              secretName: data-access-tls
 
       registrar:
         replicaCount: 1
-        image:
-          tag: "latest"
-          pullPolicy: Always
         config:
           disableDefaultRoute: true
           routes:
@@ -91,8 +105,7 @@ spec:
                 - path: "registrar_pycsw.backend.ItemBackend"
                   kwargs:
                     repository_database_uri: "postgresql://postgres:mypass@resource-catalogue-db/pycsw"
-                    ows_url: "https://data-access.{{ workspace_name }}.${domin}/ows"
-                    public_s3_url: "https://cf2.cloudferro.com:8080/{{ projectid }}:{{ bucket }}"
+                    ows_url: https://data-access.{{ workspace_name }}.${domain}/ows
             collections:
               path: registrar.route.stac.CollectionRoute
               queue: register_collection_queue
@@ -119,21 +132,11 @@ spec:
                 - path: registrar_pycsw.backend.CWLBackend
                   kwargs:
                     repository_database_uri: "postgresql://postgres:mypass@resource-catalogue-db/pycsw"
-                    ows_url: "https://data-access.{{ workspace_name }}.${domin}/ows"
+                    ows_url: "https://data-access.{{ workspace_name }}.${domain}/ows"
                     public_s3_url: "https://cf2.cloudferro.com:8080/{{ projectid }}:{{ bucket }}"
-            catalogue:
-              path: registrar.route.json.JSONRoute
-              queue: register_catalogue_queue
-              replace: true
-              backends:
-                - path: registrar_pycsw.backend.CatalogueBackend
-                  kwargs:
-                    repository_database_uri: postgresql://postgres:mypass@resource-catalogue-db/pycsw
 
       harvester:
-        image:
-          tag: "latest"
-          pullPolicy: Always
+        replicaCount: 1
         config:
           redis:
             host: vs-redis-master
@@ -155,52 +158,48 @@ spec:
                   public: False
 
       client:
+        replicaCount: 1
         ingress:
-          enabled: ${enableResourceIngresses}
-          hosts:
-          - host: data-access.{{ workspace_name }}.${domin}
+          enabled: false
         config:
           eoxserverDownloadEnabled: true
 
       database:
+        replicaCount: 1
         persistence:
           enabled: true
           existingClaim: "" # we want the claim to be generated
-          storageClass: managed-nfs-storage
+          storageClass: ${systemStorageClass}
           size: "100Gi"
 
       redis:
+        replicaCount: 1
         usePassword: false
         persistence:
           existingClaim: "" # we want the claim to be generated
         master:
           persistence:
-            existingClaim: "" # we want the claim to be generated
-            storageClass: managed-nfs-storage
+            storageClass: ${systemStorageClass}
             size: "1Gi"
+            existingClaim: "" # we want the claim to be generated
         cluster:
           enabled: false
 
       ingestor:
         replicaCount: 0
         ingress:
-          enabled: false  # doesn't support subpaths yet
-          hosts:
-          - host: data-access.{{ workspace_name }}.${domin}
-
+          enabled: false
 
       preprocessor:
         replicaCount: 0
 
       cache:
+        replicaCount: 1
         ingress:
-          enabled: ${enableResourceIngresses}
-          hosts:
-          - host: data-access.{{ workspace_name }}.${domin}
-
-
+          enabled: false
 
       seeder:
+        replicaCount: 1
         config:
           minzoom: 0
           maxzoom: 6  # restrict to only 6 for testing for now
