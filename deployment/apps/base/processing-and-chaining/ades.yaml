@@ -34,6 +34,7 @@ spec:
     image:
       pullPolicy: Always
     ingress:
+      enabled: ${enableResourceIngresses}
       ingressClassName: nginx
       annotations:
         kubernetes.io/ingress.class: nginx

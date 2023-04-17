@@ -26,6 +26,7 @@ spec:
     image:
       pullPolicy: Always
     ingress:
+      enabled: ${enableResourceIngresses}
       hosts:
         - host: workspace-api.${domain}
           paths: ["/"]

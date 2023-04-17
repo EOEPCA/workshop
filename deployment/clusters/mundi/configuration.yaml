@@ -6,13 +6,16 @@ metadata:
   namespace: eoepca-system
 data:
   clusterName: mundi
-  publicIp: 80.158.54.66
   domain: workshop.eoepca.org
-  systemStorageClass: managed-nfs-storage
+  publicIp: 80.158.54.66
   nfsServerIp: 192.168.0.222
+  systemStorageClass: managed-nfs-storage
   certificateIssuer: letsencrypt-staging
   workspaceUserPrefix: workshop-user
   stageoutToWorkspace: "false"
+  enableResourceProtection: "false"
+  enableResourceIngresses: "true" # can be disabled if resource protection is enabled
+
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository

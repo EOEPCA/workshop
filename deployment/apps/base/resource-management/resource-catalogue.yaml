@@ -22,7 +22,7 @@ spec:
     db:
       volume_size: 5Gi
     ingress:
-      enabled: true
+      enabled: ${enableResourceIngresses}
       name: resource-catalogue
       host: resource-catalogue.${domain}
       tls_host: resource-catalogue.${domain}

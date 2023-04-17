@@ -19,6 +19,7 @@ spec:
         CPL_VSIL_CURL_ALLOWED_EXTENSIONS: .TIF,.tif,.xml,.jp2,.jpg,.jpeg
 
       ingress:
+        enabled: ${enableResourceIngresses}
         annotations:
           kubernetes.io/ingress.class: nginx
           kubernetes.io/tls-acme: "true"
@@ -64,7 +65,7 @@ spec:
       renderer:
         replicaCount: 1
         ingress:
-          enabled: true
+          enabled: ${enableResourceIngresses}
           hosts:
           - host: data-access.subpath.workshop.eoepca.org
 
@@ -155,7 +156,7 @@ spec:
 
       client:
         ingress:
-          enabled: true
+          enabled: ${enableResourceIngresses}
           hosts:
           - host: data-access.subpath.workshop.eoepca.org
         config:
@@ -193,7 +194,7 @@ spec:
 
       cache:
         ingress:
-          enabled: true
+          enabled: ${enableResourceIngresses}
           hosts:
           - host: data-access.subpath.workshop.eoepca.org
 
