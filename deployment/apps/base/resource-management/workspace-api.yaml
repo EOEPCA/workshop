@@ -27,6 +27,8 @@ spec:
       pullPolicy: Always
     ingress:
       enabled: ${enableResourceIngresses}
+      annotations:
+        cert-manager.io/cluster-issuer: ${certificateIssuer}
       hosts:
         - host: workspace-api.${domain}
           paths: ["/"]
