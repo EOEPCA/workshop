@@ -32,9 +32,6 @@ spec:
     auth:
       existingSecret: minio-credentials
 
-    tls:
-      enabled: true
-
     persistence:
       storageClass: ${systemStorageClass}-retain
 
