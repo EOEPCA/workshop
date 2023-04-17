@@ -41,10 +41,7 @@ spec:
       ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: ${certificateIssuer}
-      tls:
-        - secretName: minio-console-tls
-          hosts:
-            - console.minio.${domain}
+      tls: true
 
     apiIngress:
       enabled: true
@@ -52,9 +49,6 @@ spec:
       ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: ${certificateIssuer}
-      tls:
-        - secretName: minio-tls
-          hosts:
-            - minio.${domain}
+      tls: true
 
     defaultBuckets: "eoepca, cache-bucket"
