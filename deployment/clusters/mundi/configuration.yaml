@@ -21,4 +21,4 @@ metadata:
   namespace: eoepca-system
 spec:
   interval: 2m
-  url: https://eoepca.github.io/helm-charts-dev/
+  url: https://eoepca.github.io/helm-charts/
