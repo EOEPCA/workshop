@@ -27,10 +27,10 @@ spec:
           nginx.ingress.kubernetes.io/enable-cors: "true"
           cert-manager.io/cluster-issuer: ${certificateIssuer}
         hosts:
-          - host: data-access.subpath.workshop.eoepca.org
+          - host: data-access.subpath.${domin}
         tls:
           - hosts:
-              - data-access.subpath.workshop.eoepca.org
+              - data-access.subpath.${domin}
         prefix:
           enabled: true
           value: "{{ workspace_name }}"
@@ -67,7 +67,7 @@ spec:
         ingress:
           enabled: ${enableResourceIngresses}
           hosts:
-          - host: data-access.subpath.workshop.eoepca.org
+          - host: data-access.{{ workspace_name }}.${domin}
 
       registrar:
         replicaCount: 1
@@ -91,7 +91,7 @@ spec:
                 - path: "registrar_pycsw.backend.ItemBackend"
                   kwargs:
                     repository_database_uri: "postgresql://postgres:mypass@resource-catalogue-db/pycsw"
-                    ows_url: "https://data-access.{{ workspace_name }}.workshop.eoepca.org/ows"
+                    ows_url: "https://data-access.{{ workspace_name }}.${domin}/ows"
                     public_s3_url: "https://cf2.cloudferro.com:8080/{{ projectid }}:{{ bucket }}"
             collections:
               path: registrar.route.stac.CollectionRoute
@@ -119,7 +119,7 @@ spec:
                 - path: registrar_pycsw.backend.CWLBackend
                   kwargs:
                     repository_database_uri: "postgresql://postgres:mypass@resource-catalogue-db/pycsw"
-                    ows_url: "https://data-access.{{ workspace_name }}.workshop.eoepca.org/ows"
+                    ows_url: "https://data-access.{{ workspace_name }}.${domin}/ows"
                     public_s3_url: "https://cf2.cloudferro.com:8080/{{ projectid }}:{{ bucket }}"
             catalogue:
               path: registrar.route.json.JSONRoute
@@ -158,7 +158,7 @@ spec:
         ingress:
           enabled: ${enableResourceIngresses}
           hosts:
-          - host: data-access.subpath.workshop.eoepca.org
+          - host: data-access.{{ workspace_name }}.${domin}
         config:
           eoxserverDownloadEnabled: true
 
@@ -186,7 +186,7 @@ spec:
         ingress:
           enabled: false  # doesn't support subpaths yet
           hosts:
-          - host: data-access.subpath.workshop.eoepca.org
+          - host: data-access.{{ workspace_name }}.${domin}
 
 
       preprocessor:
@@ -196,7 +196,7 @@ spec:
         ingress:
           enabled: ${enableResourceIngresses}
           hosts:
-          - host: data-access.subpath.workshop.eoepca.org
+          - host: data-access.{{ workspace_name }}.${domin}
 
 
 
