@@ -11,7 +11,7 @@ data:
   systemStorageClass: managed-nfs-storage
   nfsServerIp: 192.168.0.222
   certificateIssuer: letsencrypt-staging
-  workspaceUserPrefix: develop-user
+  workspaceUserPrefix: workshop-user
   stageoutToWorkspace: "false"
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta1
