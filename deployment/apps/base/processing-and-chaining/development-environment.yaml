@@ -22,6 +22,9 @@ spec:
   interval: 5m0s
   values:
     hub:
+      db:
+        pvc:
+          storageClassName: ${systemStorageClass}
       extraEnv:
         OAUTH_CALLBACK_URL: "https://pde.${domain}/hub/oauth_callback"
         OAUTH2_USERDATA_URL: "https://auth.${domain}/oxauth/restv1/userinfo"
