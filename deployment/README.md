@@ -76,7 +76,7 @@ The [deployment script](./deploy-to-cluster) bootstraps Flux in to the currently
 
 NOTE - The path argument should be relative to the repository root. For example: 
 ```
-./deploy-to-cluster -o EOEPCA -r eoepca-workshop --path ./deployment/clusters/mundi --personal false
+./deploy-to-cluster -o EOEPCA -r workshop --path ./deployment/clusters/mundi --personal false
 ```
 
 NOTE - For deployment of additional clusters it is essential to make a copy of the `clusters/<target system>` directory, to ensure that the cluster deployment configuration that flux maintains in GitHub is kept independent for each cluster.
