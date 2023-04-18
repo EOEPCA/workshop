@@ -1,0 +1,26 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: eoepca-configuration
+  namespace: eoepca-system
+data:
+  clusterName: mundi
+  domain: workshop.eoepca.org
+  publicIp: 80.158.54.66
+  nfsServerIp: 192.168.0.222
+  systemStorageClass: managed-nfs-storage
+  certificateIssuer: letsencrypt-production
+  workspaceUserPrefix: workshop-user
+  stageoutToWorkspace: "false"
+  enableResourceIngresses: "true" # can be disabled if resource protection is deployed
+
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: eoepca
+  namespace: eoepca-system
+spec:
+  interval: 2m
+  url: https://eoepca.github.io/helm-charts/

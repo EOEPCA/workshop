@@ -1,0 +1,56 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: resource-catalogue-guard
+  namespace: rm
+spec:
+  suspend: false
+  chart:
+    spec:
+      chart: resource-guard
+      version: 1.2.4
+      sourceRef:
+        kind: HelmRepository
+        name: eoepca
+        namespace: eoepca-system
+  dependsOn:
+    - name: login-service
+      namespace: um
+  timeout: 25m0s
+  interval: 5m0s
+  values:
+    global:
+      context: resource-catalogue
+      domain: ${domain}
+      nginxIp: ${publicIp}
+      certManager:
+        clusterIssuer: ${certificateIssuer}
+
+    pep-engine:
+      configMap:
+        asHostname: auth
+        pdpHostname: auth
+      volumeClaim:
+        name: eoepca-resman-pvc
+        create: false
+
+    uma-user-agent:
+      nginxIntegration:
+        enabled: true
+        hosts:
+          - host: resource-catalogue
+            paths:
+              - path: /(.*)
+                service:
+                  name: resource-catalogue-service
+                  port: 80
+        annotations:
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+          nginx.ingress.kubernetes.io/enable-cors: "true"
+          nginx.ingress.kubernetes.io/rewrite-target: /$1
+      client:
+        credentialsSecretName: "resource-catalogue-uma-user-agent"
+      logging:
+        level: "info"
+      unauthorizedResponse: 'Bearer realm="https://portal.${domain}/oidc/authenticate/"'
+      openAccess: false

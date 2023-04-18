@@ -1,0 +1,69 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: nfs-subdir-external-provisioner
+  namespace: eoepca-storage
+spec:
+  url: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner
+  interval: 30m
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: nfs-provisioner
+  namespace: eoepca-storage
+spec:
+  chart:
+    spec:
+      chart: nfs-subdir-external-provisioner
+      sourceRef:
+        kind: HelmRepository
+        name: nfs-subdir-external-provisioner
+        namespace: eoepca-storage
+  values:
+    imagePullSecrets:
+        - name: regcred
+    provisionerName: nfs-storage
+    storageClass:
+      name: ${systemStorageClass}
+      create: true
+      reclaimPolicy: Delete
+      archiveOnDelete: false
+      allowVolumeExpansion: true
+    nfs:
+      # It should be ensured that the cluster can access this server 
+      # Check route tables, cloud security groups e.t.c associated with this server
+      server: "${nfsServerIp}"
+      path: /data/dynamic
+  timeout: 15m
+  interval: 30m0s
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: nfs-provisioner-retain
+  namespace: eoepca-storage
+spec:
+  chart:
+    spec:
+      chart: nfs-subdir-external-provisioner
+      version: 4.0.12
+      sourceRef:
+        kind: HelmRepository
+        name: nfs-subdir-external-provisioner
+        namespace: eoepca-storage
+  values:
+    provisionerName: nfs-storage-retain
+    storageClass:
+      name: ${systemStorageClass}-retain
+      create: true
+      reclaimPolicy: Retain
+      allowVolumeExpansion: true
+    nfs:
+      # It should be ensured that the cluster can access this server 
+      # Check route tables, cloud security groups e.t.c associated with this server
+      server: "${nfsServerIp}"
+      path: /data/dynamic
+  timeout: 15m
+  interval: 30m0s

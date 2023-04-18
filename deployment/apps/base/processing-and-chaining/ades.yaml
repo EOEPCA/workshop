@@ -1,0 +1,93 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: ades
+  namespace: proc
+spec:
+  chart:
+    spec:
+      chart: ades
+      version: 2.0.6
+      sourceRef:
+        kind: HelmRepository
+        name: eoepca
+        namespace: eoepca-system
+  dependsOn:
+    - name: nfs-provisioner
+      namespace: eoepca-storage
+    - name: minio
+      namespace: eoepca-storage
+
+  valuesFrom:
+    - kind: Secret
+      name: minio-credentials
+      valuesKey: root-user
+      targetPath: workflowExecutor.inputs.STAGEOUT_AWS_ACCESS_KEY_ID
+    - kind: Secret
+      name: minio-credentials
+      valuesKey: root-password
+      targetPath: workflowExecutor.inputs.STAGEOUT_AWS_SECRET_ACCESS_KEY
+  values:
+    imagePullSecrets:
+      - name: regcred
+    replicaCount: 1
+    image:
+      pullPolicy: Always
+    ingress:
+      enabled: ${enableResourceIngresses}
+      ingressClassName: nginx
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        ingress.kubernetes.io/ssl-redirect: "false"
+        nginx.ingress.kubernetes.io/ssl-redirect: "false"
+        cert-manager.io/cluster-issuer: ${certificateIssuer}
+      hosts:
+        - host: ades.${domain}
+          paths:
+            - path: /
+              pathType: ImplementationSpecific    
+      tls:
+        - hosts:
+            - ades.${domain}
+          secretName: ades-tls
+    
+    persistence:
+      storageClass: "${systemStorageClass}"
+
+    workflowExecutor:
+      imagePullSecrets:
+        - name: regcred
+      inputs:
+        APP: ades
+
+        STAGEIN_AWS_SERVICEURL: http://data.cloudferro.com
+        STAGEIN_AWS_ACCESS_KEY_ID: test
+        STAGEIN_AWS_SECRET_ACCESS_KEY: test
+        STAGEIN_AWS_REGION: RegioneOne
+
+        STAGEOUT_AWS_SERVICEURL: http://minio.${domain}
+        STAGEOUT_AWS_REGION: us-east-1
+        STAGEOUT_OUTPUT: s3://eoepca
+
+      # Enable if integrating with workspace for stageout
+      useResourceManager: ${stageoutToWorkspace}
+      resourceManagerWorkspacePrefix: ${workspaceUserPrefix}
+      resourceManagerEndpoint: "https://workspace-api.${domain}"
+      platformDomain: "https://auth.${domain}"
+
+      processingStorageClass: ${systemStorageClass}
+      processingVolumeTmpSize: "6Gi"
+      processingVolumeOutputSize: "6Gi"
+      processingMaxRam: "12Gi"
+      processingMaxCores: "4"
+      processingKeepWorkspace: "false"
+      processingKeepWorkspaceIfFailed: "true"
+     
+    wps:
+      pepBaseUrl: "http://ades-pep:5576"
+      usePep: "false"
+      maincfgtpl: "files/main.cfg.tpl"
+
+    # values - end
+  timeout: 15m0s
+  interval: 1m0s

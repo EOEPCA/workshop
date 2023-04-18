@@ -1,0 +1,27 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: user-profile
+  namespace: um
+spec:
+  chart:
+    spec:
+      chart: user-profile
+      version: 1.1.6
+      sourceRef:
+        kind: HelmRepository
+        name: eoepca
+        namespace: eoepca-system
+  dependsOn:
+    - name: login-service
+  values:
+    imagePullSecrets:
+      - name: regcred
+    global:
+      domain: auth.${domain}
+      nginxIp: ${publicIp}
+    volumeClaim:
+      name: eoepca-userman-pvc
+      create: false
+  timeout: 25m0s
+  interval: 1m0s

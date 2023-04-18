@@ -1,0 +1,74 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: harbor
+  namespace: eoepca-storage
+spec:
+  url: https://helm.goharbor.io
+  interval: 60m
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: harbor
+  namespace: eoepca-storage
+spec:
+  interval: 10m
+  timeout: 15m
+  chart:
+    spec:
+      chart: harbor
+      version: 1.11.1
+      sourceRef:
+        kind: HelmRepository
+        name: harbor
+        namespace: eoepca-storage
+  dependsOn:
+    - name: nfs-provisioner
+
+  valuesFrom:
+    - kind: Secret
+      name: harbor-credentials
+      valuesKey: password
+      targetPath: harborAdminPassword
+
+  values:
+    imagePullSecrets:
+      - name: regcred
+
+    externalURL: https://harbor.${domain}
+
+    expose:
+      ingress:
+        annotations:
+          kubernetes.io/ingress.class: nginx
+          cert-manager.io/cluster-issuer: ${certificateIssuer}
+          nginx.ingress.kubernetes.io/proxy-read-timeout: '600'
+
+        hosts:
+          core: harbor.${domain}
+          notary: harbor-notary.${domain}
+
+    persistence:
+      persistentVolumeClaim:
+        registry:
+          storageClass: ${systemStorageClass}
+        chartmuseum:
+          storageClass: ${systemStorageClass}
+        jobservice:
+          jobLog:
+            storageClass: ${systemStorageClass}
+        database:
+          storageClass: ${systemStorageClass}
+        redis:
+          storageClass: ${systemStorageClass}
+        trivy:
+          storageClass: ${systemStorageClass}
+
+    chartmuseum:
+      enabled: false
+    trivy:
+      enabled: false
+    notary:
+      enabled: false

@@ -1,0 +1,62 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: login-service
+  namespace: um
+spec:
+  chart:
+    spec:
+      chart: login-service
+      version: 1.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: eoepca
+        namespace: eoepca-system
+  dependsOn:
+    - name: storage
+      namespace: eoepca-storage
+  valuesFrom:
+    - kind: Secret
+      name: login-service-credentials
+      valuesKey: adminPass
+      targetPath: config.adminPass
+    - kind: Secret
+      name: login-service-credentials
+      valuesKey: ldapPass
+      targetPath: config.ldapPass
+  values:
+    imagePullSecrets:
+      - name: regcred
+    global:
+      domain: auth.${domain}
+      nginxIp: ${publicIp}
+      namespace: um
+    volumeClaim:
+      name: eoepca-userman-pvc
+      create: false
+    config:
+      domain: auth.${domain}
+      volumeClaim:
+        name: eoepca-userman-pvc
+    opendj:
+      volumeClaim:
+        name: eoepca-userman-pvc
+    oxauth:
+      volumeClaim:
+        name: eoepca-userman-pvc
+    oxtrust:
+      volumeClaim:
+        name: eoepca-userman-pvc
+    nginx:
+      ingress:
+        annotations:
+          cert-manager.io/cluster-issuer: ${certificateIssuer}
+        hosts:
+          - auth.${domain}
+        tls:
+        - secretName: login-service-tls
+          hosts:
+            - auth.${domain}
+            
+  timeout: 25m0s
+  interval: 1m0s
