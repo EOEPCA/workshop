@@ -10,4 +10,5 @@ onExit() {
 trap onExit EXIT
 
 # flux
-curl -s https://fluxcd.io/install.sh | sudo bash
+FLUX_VERSION="0.38.3"
+curl -s https://fluxcd.io/install.sh | sudo FLUX_VERSION="${FLUX_VERSION}" bash
