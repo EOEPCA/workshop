@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - 010-ingress-nginx.yaml
   - 020-cert-manager.yaml
+  - 030-minio.yaml
