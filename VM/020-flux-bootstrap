@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+ORIG_DIR="$(pwd)"
+cd "$(dirname "$0")"
+BIN_DIR="$(pwd)"
+
+onExit() {
+  cd "${ORIG_DIR}"
+}
+trap onExit EXIT
+
+GITHUB_USER="${GITHUB_USER:-EOEPCA}"
+
+# ensure that env GITHUB_USER and GITHUB_TOKEN are exported
+if [ -z "${GITHUB_USER}" -o -z "${GITHUB_TOKEN}" ]; then
+  echo "ERROR: Both GITHUB_USER and GITHUB_TOKEN must be set"
+  exit 1
+fi
+
+export GITHUB_REPO="${GITHUB_REPO:-workshop}"
+export GITHUB_BRANCH="${GITHUB_BRANCH:-main}"
+export GITHUB_PATH="${GITHUB_PATH:-VM/deploy}"
+
+# Initialise flux in the cluster
+flux bootstrap github \
+  --owner="${GITHUB_USER}" \
+  --repository="${GITHUB_REPO}" \
+  --branch="${GITHUB_BRANCH}" \
+  --path="${GITHUB_PATH}"
