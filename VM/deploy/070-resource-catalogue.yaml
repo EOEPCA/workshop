@@ -1,0 +1,34 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: resource-catalogue
+  namespace: rm
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: rm-resource-catalogue
+      version: 1.2.2
+      sourceRef:
+        kind: HelmRepository
+        name: eoepca-dev
+        namespace: common
+  values:
+    global:
+      namespace: rm
+    ingress:
+      enabled: true
+      name: resource-catalogue-open
+      host: 185-52-195-215.nip.io
+      # subpath_enabled: true
+      # subpath: "/resource-catalogue"
+      tls_host: 185-52-195-215.nip.io
+      tls_secret_name: resource-catalogue-tls
+      # annotations:
+      #   nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    db:
+      volume_storage_type: standard
+    pycsw:
+      config:
+        server:
+          url: http://resource-catalogue-open.185-52-195-215.nip.io/
