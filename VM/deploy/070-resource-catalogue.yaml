@@ -23,7 +23,7 @@ spec:
       # subpath_enabled: true
       # subpath: "/resource-catalogue"
       tls_host: resource-catalogue-open.185-52-195-215.nip.io
-      tls_secret_name: resource-catalogue-tls
+      tls_secret_name: resource-catalogue-open-tls
       # annotations:
       #   nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
     db:
