@@ -19,10 +19,10 @@ spec:
     ingress:
       enabled: true
       name: resource-catalogue-open
-      host: 185-52-195-215.nip.io
+      host: resource-catalogue-open.185-52-195-215.nip.io
       # subpath_enabled: true
       # subpath: "/resource-catalogue"
-      tls_host: 185-52-195-215.nip.io
+      tls_host: resource-catalogue-open.185-52-195-215.nip.io
       tls_secret_name: resource-catalogue-tls
       # annotations:
       #   nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
