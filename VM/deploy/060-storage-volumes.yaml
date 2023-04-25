@@ -16,7 +16,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: eoepca-proc-pvc
-  namespace: rm
+  namespace: proc
 spec:
   accessModes:
     - ReadWriteMany
