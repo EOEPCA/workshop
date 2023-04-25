@@ -29,6 +29,10 @@ spec:
     db:
       volume_storage_type: standard
     pycsw:
+      image:
+        repository: geopython/pycsw
+        pullPolicy: Always
+        tag: "eoepca-staging"
       config:
         server:
           url: http://resource-catalogue-open.185-52-195-215.nip.io/
