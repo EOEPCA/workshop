@@ -792,7 +792,7 @@ spec:
       renderer:
         replicaCount: 2
         ingress:
-          enabled: false
+          enabled: true
         resources:
           limits:
             cpu: 1.5
@@ -896,7 +896,7 @@ spec:
       client:
         replicaCount: 1
         ingress:
-          enabled: false
+          enabled: true
         config:
           serviceUrl: "//data-access-open.185-52-195-215.nip.io/"
           eoxserverDownloadEnabled: true
@@ -933,7 +933,7 @@ spec:
       #-------------------------------------------------------------------------
       cache:
         ingress:
-          enabled: false
+          enabled: true
 # ---
 # #-------------------------------------------------------------------------------
 # # Data Access Ingress (path-based)
