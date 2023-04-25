@@ -6,3 +6,4 @@ resources:
   - 030-minio.yaml
   - 040-namespaces.yaml
   - 050-helm-repositories.yaml
+  - 060-storage-volumes.yaml
