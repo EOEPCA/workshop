@@ -50,7 +50,7 @@ spec:
   chart:
     spec:
       chart: data-access
-      version: 1.2.5
+      version: 1.3.0-dev2
       sourceRef:
         kind: HelmRepository
         name: eoepca
@@ -830,6 +830,33 @@ spec:
                 - path: registrar_pycsw.backend.CollectionBackend
                   kwargs:
                     repository_database_uri: postgresql://postgres:mypass@resource-catalogue-db/pycsw
+
+          #   ades:
+          #     path: registrar.route.json.JSONRoute
+          #     queue: register_ades_queue
+          #     replace: true
+          #     backends:
+          #       - path: registrar_pycsw.backend.ADESBackend
+          #         kwargs:
+          #           repository_database_uri: postgresql://postgres:mypass@resource-catalogue-db/pycsw
+
+          #   application:
+          #     path: registrar.route.json.JSONRoute
+          #     queue: register_application_queue
+          #     replace: true
+          #     backends:
+          #       - path: registrar_pycsw.backend.CWLBackend
+          #         kwargs:
+          #           repository_database_uri: postgresql://postgres:mypass@resource-catalogue-db/pycsw
+
+          #   catalogue:
+          #     path: registrar.route.json.JSONRoute
+          #     queue: register_catalogue_queue
+          #     replace: true
+          #     backends:
+          #       - path: registrar_pycsw.backend.CatalogueBackend
+          #         kwargs:
+          #           repository_database_uri: postgresql://postgres:mypass@resource-catalogue-db/pycsw
 
       #-------------------------------------------------------------------------
       # vs.harvester
