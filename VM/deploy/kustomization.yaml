@@ -10,3 +10,4 @@ resources:
   - 070-login-service.yaml
   - 080-resource-catalogue.yaml
   - 090-data-access.yaml
+  - 100-ades.yaml
