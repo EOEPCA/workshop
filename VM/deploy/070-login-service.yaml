@@ -1,0 +1,57 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: login-service
+  namespace: um
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: login-service
+      version: 1.2.2
+      sourceRef:
+        kind: HelmRepository
+        name: eoepca-dev
+        namespace: common
+  values:
+    global:
+      domain: auth.185-52-195-215.nip.io
+      nginxIp: 185.52.195.215
+      namespace: um
+    volumeClaim:
+      name: eoepca-userman-pvc
+      create: false
+    config:
+      domain: auth.185-52-195-215.nip.io
+      adminPass: Chang3me!
+      ldapPass: Chang3me!
+      volumeClaim:
+        name: eoepca-userman-pvc
+    opendj:
+      # This can be useful to workaround helm 'failed to upgrade' errors due to
+      # immutable fields in the 'login-service-persistence-init-ss' job
+      # persistence:
+      #   enabled: false
+      volumeClaim:
+        name: eoepca-userman-pvc
+    oxauth:
+      volumeClaim:
+        name: eoepca-userman-pvc
+    oxtrust:
+      volumeClaim:
+        name: eoepca-userman-pvc
+    nginx:
+      ingress:
+        enabled: true
+        annotations:
+          # kubernetes.io/ingress.class: nginx
+          # ingress.kubernetes.io/ssl-redirect: "false"
+          # nginx.ingress.kubernetes.io/ssl-redirect: "false"
+          cert-manager.io/cluster-issuer: letsencrypt
+        path: /
+        hosts:
+          - auth.185-52-195-215.nip.io
+        tls: 
+        - secretName: login-service-tls
+          hosts:
+            - auth.185-52-195-215.nip.io

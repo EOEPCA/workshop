@@ -7,5 +7,6 @@ resources:
   - 040-namespaces.yaml
   - 050-helm-repositories.yaml
   - 060-storage-volumes.yaml
-  - 070-resource-catalogue.yaml
-  - 080-data-access.yaml
+  - 070-login-service.yaml
+  - 080-resource-catalogue.yaml
+  - 090-data-access.yaml
