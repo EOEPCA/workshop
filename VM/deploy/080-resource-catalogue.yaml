@@ -17,13 +17,13 @@ spec:
     global:
       namespace: rm
     ingress:
-      enabled: true
-      name: resource-catalogue-open
-      host: resource-catalogue-open.185-52-195-215.nip.io
+      enabled: false
+      # name: resource-catalogue-open
+      # host: resource-catalogue-open.185-52-195-215.nip.io
       # subpath_enabled: true
       # subpath: "/resource-catalogue"
-      tls_host: resource-catalogue-open.185-52-195-215.nip.io
-      tls_secret_name: resource-catalogue-open-tls
+      # tls_host: resource-catalogue-open.185-52-195-215.nip.io
+      # tls_secret_name: resource-catalogue-open-tls
       # annotations:
       #   nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
     db:
@@ -35,4 +35,4 @@ spec:
         tag: "eoepca-staging"
       config:
         server:
-          url: http://resource-catalogue-open.185-52-195-215.nip.io/
+          url: http://resource-catalogue.185-52-195-215.nip.io/
