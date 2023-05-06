@@ -31,8 +31,8 @@ spec:
         namespace: ingress-nginx
   values:
     controller:
-      config:
-        ssl-redirect: false
+      # config:
+      #   ssl-redirect: false
       service:
         externalIPs:
           - 192.168.49.2
