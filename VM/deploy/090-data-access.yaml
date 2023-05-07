@@ -74,19 +74,19 @@ spec:
       # global.ingress
       #-------------------------------------------------------------------------
       ingress:
-        enabled: true # ${OPEN_INGRESS}
-        annotations:
-          kubernetes.io/ingress.class: nginx
-          kubernetes.io/tls-acme: "true"
-          nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
-          nginx.ingress.kubernetes.io/enable-cors: "true"
-          cert-manager.io/cluster-issuer: "letsencrypt"
-        hosts:
-          - host: data-access-open.185-52-195-215.nip.io
+        enabled: false
+        # annotations:
+        #   kubernetes.io/ingress.class: nginx
+        #   kubernetes.io/tls-acme: "true"
+        #   nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+        #   nginx.ingress.kubernetes.io/enable-cors: "true"
+        #   cert-manager.io/cluster-issuer: "letsencrypt"
+        # hosts:
+        #   - host: data-access.185-52-195-215.nip.io
         tls:
           - hosts:
-              - data-access-open.185-52-195-215.nip.io
-            secretName: data-access-open-tls
+              - data-access.185-52-195-215.nip.io
+            # secretName: data-access-tls
 
       #-------------------------------------------------------------------------
       # global.storage
@@ -117,7 +117,7 @@ spec:
         title: EOEPCA Data Access Service developed by EOX
         abstract: EOEPCA Data Access Service developed by EOX
         header: 'EOEPCA Data Access View Server (VS) Client powered by <a href="//eox.at"><img src="//eox.at/wp-content/uploads/2017/09/EOX_Logo.svg" alt="EOX" style="height:25px;margin-left:10px"/></a>'
-        url: https://data-access-open.185-52-195-215.nip.io/ows # https://${name}.${domain}/ows
+        url: https://data-access.185-52-195-215.nip.io/ows # https://${name}.${domain}/ows
 
       #-------------------------------------------------------------------------
       # global.layers
@@ -792,7 +792,7 @@ spec:
       renderer:
         replicaCount: 2
         ingress:
-          enabled: true
+          enabled: false
         resources:
           limits:
             cpu: 1.5
@@ -816,7 +816,7 @@ spec:
             - path: registrar_pycsw.backend.ItemBackend
               kwargs:
                 repository_database_uri: postgresql://postgres:mypass@resource-catalogue-db/pycsw
-                ows_url: https://data-access-open.185-52-195-215.nip.io/ows # https://${name}.${domain}/ows
+                ows_url: https://data-access.185-52-195-215.nip.io/ows # https://${name}.${domain}/ows
           defaultSuccessQueue: seed_queue
           #----------------
           # Specific routes
@@ -896,9 +896,9 @@ spec:
       client:
         replicaCount: 1
         ingress:
-          enabled: true
+          enabled: false
         config:
-          serviceUrl: "//data-access-open.185-52-195-215.nip.io/"
+          serviceUrl: "//data-access.185-52-195-215.nip.io/"
           eoxserverDownloadEnabled: true
           timeDomain:
             - "2002-01-01T00:00:00Z"
@@ -933,7 +933,7 @@ spec:
       #-------------------------------------------------------------------------
       cache:
         ingress:
-          enabled: true
+          enabled: false
 # ---
 # #-------------------------------------------------------------------------------
 # # Data Access Ingress (path-based)
@@ -941,7 +941,7 @@ spec:
 # apiVersion: networking.k8s.io/v1
 # kind: Ingress
 # metadata:
-#   name: data-access-open
+#   name: data-access
 #   namespace: rm
 #   annotations:
 #     kubernetes.io/ingress.class: nginx
@@ -950,55 +950,55 @@ spec:
 #     nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
 #     nginx.ingress.kubernetes.io/rewrite-target: /$1
 #     nginx.ingress.kubernetes.io/configuration-snippet: |
-#       rewrite ^(/data-access-open)$ $1/ redirect;
+#       rewrite ^(/data-access)$ $1/ redirect;
 # spec:
 #   rules:
 #     - host: 185-52-195-215.nip.io
 #       http:
 #         paths:
-#           - path: /data-access-open/(ows.*)
+#           - path: /data-access/(ows.*)
 #             pathType: Prefix
 #             backend:
 #               service:
 #                 name: data-access-renderer
 #                 port:
 #                   number: 80
-#           - path: /data-access-open/(opensearch.*)
+#           - path: /data-access/(opensearch.*)
 #             pathType: Prefix
 #             backend:
 #               service:
 #                 name: data-access-renderer
 #                 port:
 #                   number: 80
-#           - path: /data-access-open/(coverages/metadata.*)
+#           - path: /data-access/(coverages/metadata.*)
 #             pathType: Prefix
 #             backend:
 #               service:
 #                 name: data-access-renderer
 #                 port:
 #                   number: 80
-#           - path: /data-access-open/(admin.*)
+#           - path: /data-access/(admin.*)
 #             pathType: Prefix
 #             backend:
 #               service:
 #                 name: data-access-renderer
 #                 port:
 #                   number: 80
-#           - path: /data-access-open/cache/(.*)
+#           - path: /data-access/cache/(.*)
 #             pathType: Prefix
 #             backend:
 #               service:
 #                 name: data-access-cache
 #                 port:
 #                   number: 80
-#           - path: /data-access-open/(.*)
+#           - path: /data-access/(.*)
 #             pathType: Prefix
 #             backend:
 #               service:
 #                 name: data-access-client
 #                 port:
 #                   number: 80
-#           - path: /data-access-open$
+#           - path: /data-access$
 #             pathType: Exact
 #             backend:
 #               service:
