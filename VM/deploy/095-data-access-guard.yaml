@@ -80,11 +80,11 @@ spec:
       unauthorizedResponse: 'Bearer realm="https://portal.185-52-195-215.nip.io/oidc/authenticate/"'
       openAccess: true  # access for any authenticated user
       insecureTlsSkipVerify: true
----
-apiVersion: v1
-kind: Secret
-type: Opaque
-metadata:
-  name: authz-agent
-  namespace: rm
-data: {}
+# ---
+# apiVersion: v1
+# kind: Secret
+# type: Opaque
+# metadata:
+#   name: authz-agent
+#   namespace: rm
+# data: {}
