@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  jupyterlab:
+    container_name: jupyterlab
+    hostname: jupyterlab
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: eoepca/workshop
+    ports:
+    - "8888:8888"
+    volumes:
+    - ${PWD}/workshop:/home/${PUSER}/work
+    - ${PWD}/kubeconfig:/home/${PUSER}/.kube/config
+    # START (make permissions work)
+    environment:
+      NB_USER: "${PUSER}"
+      NB_UID: "${PUID}"
+      NB_GID: "${PGID}"
+      CHOWN_HOME: "yes"
+      JUPYTER_ENABLE_LAB: "yes"
+    user: root  # needed to perform the user chown
+    working_dir: "/home/${PUSER}/work"
+    # END (make permissions work)
+    command: ["start-notebook.sh", "--NotebookApp.token=''" ]
