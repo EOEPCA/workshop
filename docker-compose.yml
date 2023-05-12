@@ -9,7 +9,7 @@ services:
       dockerfile: Dockerfile
     image: eoepca/workshop
     ports:
-    - "8888:8888"
+    - "${EXPOSE_PORT}:8888"
     networks:
       - minikube
     volumes:
