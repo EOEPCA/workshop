@@ -8,14 +8,14 @@ spec:
   chart:
     spec:
       chart: ades
-      version: 2.0.6
+      version: 2.0.14
       sourceRef:
         kind: HelmRepository
-        name: eoepca
+        name: eoepca-dev
         namespace: common
   values:
     image:
-      # tag: "dev2.0.15"
+      # tag: "2.0.15"
       pullPolicy: Always
     workflowExecutor:
       inputs:
@@ -33,7 +33,6 @@ spec:
       resourceManagerWorkspacePrefix: "foss4g-user"
       resourceManagerEndpoint: "https://workspace-api.185-52-195-215.nip.io"
       platformDomain: "https://auth.185-52-195-215.nip.io"
-      # usernameJwtJsonPath: "user_name"
       # Kubernetes storage
       processingStorageClass: standard
       # Size of the Kubernetes Tmp Volumes
@@ -50,18 +49,11 @@ spec:
     persistence:
       storageClass: standard
     ingress:
-      enabled: true
-      annotations:
-        kubernetes.io/ingress.class: nginx
-        ingress.kubernetes.io/ssl-redirect: "false"
-        nginx.ingress.kubernetes.io/ssl-redirect: "false"
-        cert-manager.io/cluster-issuer: letsencrypt
-      hosts:
-        - host: ades-open.185-52-195-215.nip.io
-          paths: 
-            - path: /
-              pathType: ImplementationSpecific
-      tls:
-        - hosts:
-            - ades-open.185-52-195-215.nip.io
-          secretName: ades-open-tls
+      enabled: false
+    resources:
+      limits:
+        cpu: 2
+        memory: 4Gi
+      requests:
+        cpu: 500m
+        memory: 2Gi
