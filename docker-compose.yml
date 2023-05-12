@@ -10,6 +10,8 @@ services:
     image: eoepca/workshop
     ports:
     - "8888:8888"
+    networks:
+      - minikube
     volumes:
     - ${PWD}/workshop:/home/${PUSER}/work
     - ${PWD}/kubeconfig:/home/${PUSER}/.kube/config
@@ -24,3 +26,8 @@ services:
     working_dir: "/home/${PUSER}/work"
     # END (make permissions work)
     command: ["start-notebook.sh", "--NotebookApp.token=''" ]
+
+networks:
+  minikube:
+    name: minikube
+    external: true
