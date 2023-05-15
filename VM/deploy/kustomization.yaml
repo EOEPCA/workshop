@@ -6,7 +6,7 @@ resources:
   - 030-namespaces.yaml
   - 040-helm-repositories.yaml
   - 050-storage-volumes.yaml
-  # - 060-minio.yaml
+  - 060-minio.yaml
   - 070-login-service.yaml
   - 080-resource-catalogue.yaml
   - 085-resource-catalogue-guard.yaml

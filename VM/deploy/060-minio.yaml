@@ -1,14 +1,22 @@
 ---
 apiVersion: v1
-kind: Namespace
+kind: Secret
 metadata:
-  name: minio
+  name: minio-auth
+  namespace: rm
+data:
+  # root username = eoepca
+  root-user: ZW9lcGNh          # for minio
+  rootUser: ZW9lcGNh           # for bucket operator
+  # root password = changeme
+  root-password: Y2hhbmdlbWU=  # for minio
+  rootPassword: Y2hhbmdlbWU=   # for bucket operator
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
   name: minio
-  namespace: minio
+  namespace: rm
 spec:
   interval: 2m
   url: https://charts.bitnami.com/bitnami
@@ -17,7 +25,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: minio
-  namespace: minio
+  namespace: rm
 spec:
   interval: 5m 
   chart:
@@ -26,11 +34,10 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: minio
-        namespace: minio
+        namespace: rm
   values:
     auth:
-      rootUser: eoepca
-      rootPassword: changeme
+      existingSecret: minio-auth
 
     ingress:
       enabled: true
