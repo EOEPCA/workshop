@@ -45,7 +45,7 @@ spec:
       hostname: minio-console.185-52-195-215.nip.io
       annotations:
         kubernetes.io/ingress.class: nginx
-        cert-manager.io/cluster-issuer: letsencrypt
+        cert-manager.io/cluster-issuer: letsencrypt-staging
         nginx.ingress.kubernetes.io/ssl-redirect: "true"
         nginx.ingress.kubernetes.io/proxy-body-size: "0"
         nginx.ingress.kubernetes.io/proxy-read-timeout: '600'
@@ -57,7 +57,7 @@ spec:
       hostname: minio.185-52-195-215.nip.io
       annotations:
         kubernetes.io/ingress.class: nginx
-        cert-manager.io/cluster-issuer: letsencrypt
+        cert-manager.io/cluster-issuer: letsencrypt-staging
         nginx.ingress.kubernetes.io/ssl-redirect: "true"
         nginx.ingress.kubernetes.io/proxy-body-size: "0"
         nginx.ingress.kubernetes.io/proxy-read-timeout: '600'
