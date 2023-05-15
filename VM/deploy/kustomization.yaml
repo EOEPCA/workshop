@@ -14,4 +14,5 @@ resources:
   - 095-data-access-guard.yaml
   - 100-ades.yaml
   - 105-ades-guard.yaml
+  - 110-harbor.yaml
   # - 110-workspace-api.yaml

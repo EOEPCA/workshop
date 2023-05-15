@@ -1,0 +1,67 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: harbor
+  namespace: rm
+spec:
+  interval: 2m
+  url: https://helm.goharbor.io
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: harbor
+  namespace: rm
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: harbor
+      version: 1.7.3
+      sourceRef:
+        kind: HelmRepository
+        name: harbor
+        namespace: rm
+  values:
+    expose:
+      ingress:
+        annotations:
+          kubernetes.io/ingress.class: nginx
+          cert-manager.io/cluster-issuer: letsencrypt
+          nginx.ingress.kubernetes.io/proxy-read-timeout: '600'
+
+          # from chart:
+          ingress.kubernetes.io/ssl-redirect: "true"
+          ingress.kubernetes.io/proxy-body-size: "0"
+          nginx.ingress.kubernetes.io/ssl-redirect: "true"
+          nginx.ingress.kubernetes.io/proxy-body-size: "0"
+
+        hosts:
+          core: harbor.185-52-195-215.nip.io
+
+    persistence:
+      persistentVolumeClaim:
+        registry:
+          storageClass: standard
+        chartmuseum:
+          storageClass: standard
+        jobservice:
+          storageClass: standard
+        database:
+          storageClass: standard
+        redis:
+          storageClass: standard
+        trivy:
+          storageClass: standard
+
+    externalURL: https://harbor.185-52-195-215.nip.io
+    # initial password for logging in with user "admin"
+    # harborAdminPassword: "Harbor12345"  # this is the default in the helm chart
+
+    chartmuseum:
+      enabled: false
+    trivy:
+      enabled: false
+    notary:
+      enabled: false
