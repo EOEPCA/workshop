@@ -44,14 +44,24 @@ spec:
       ingressClassName: nginx
       hostname: minio-console.185-52-195-215.nip.io
       annotations:
-        nginx.ingress.kubernetes.io/proxy-body-size: 0m
+        kubernetes.io/ingress.class: nginx
+        cert-manager.io/cluster-issuer: letsencrypt
+        nginx.ingress.kubernetes.io/ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/proxy-body-size: "0"
+        nginx.ingress.kubernetes.io/proxy-read-timeout: '600'
+      tls: true
 
     apiIngress:
       enabled: true
       ingressClassName: nginx
       hostname: minio.185-52-195-215.nip.io
       annotations:
-        nginx.ingress.kubernetes.io/proxy-body-size: 0m
+        kubernetes.io/ingress.class: nginx
+        cert-manager.io/cluster-issuer: letsencrypt
+        nginx.ingress.kubernetes.io/ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/proxy-body-size: "0"
+        nginx.ingress.kubernetes.io/proxy-read-timeout: '600'
+      tls: true
 
     persistence:
       storageClass: standard
