@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   - 010-ingress-nginx.yaml
   - 020-cert-manager.yaml
-  - 030-minio.yaml
+  # - 030-minio.yaml
   - 040-namespaces.yaml
   - 050-helm-repositories.yaml
   - 060-storage-volumes.yaml
