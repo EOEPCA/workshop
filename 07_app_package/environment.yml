@@ -1,0 +1,14 @@
+name: env_water_mask
+channels:
+  - terradue
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.9
+  - ipykernel
+  - pystac
+  - click
+  - gdal
+  - scikit-image
+  - pip
+  - rio_stac
