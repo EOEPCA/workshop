@@ -1,11 +1,12 @@
-### Water bodies detection Application Package development and test
+# Water bodies detection Application Package development and test
 
 
 **Alice implements the application package**
 
 ![image](water-bodies-tb18-alice.jpg)
 
-This Application Package takes as input Copernicus Sentinel-2 data and detects water bodies by applying the Otsu thresholding technique on the Normalized Difference Water Index (NDWI).
+## Background 
+This Application Package takes as input Copernicus Sentinel-2 data and detects water bodies by applying the *Otsu* thresholding technique on the Normalized Difference Water Index (NDWI).
 
 The NDWI is calculated with: 
 
@@ -13,9 +14,7 @@ $$
 NDWI = { (green - nir) \over (green + nir) } 
 $$
 
-Typically, NDWI values of water bodies are larger than 0.2 and built-up features have positive values between 0 and 0.2.
-
-Vegetation has much smaller NDWI values, which results in distinguishing vegetation from water bodies easier. 
+Typically, NDWI values of water bodies are larger than 0.2 and built-up features have positive values between 0 and 0.2. Vegetation has much smaller NDWI values, which results in distinguishing vegetation from water bodies easier. 
 
 The NDWI values correspond to the following ranges:
 
@@ -32,6 +31,7 @@ In the simplest form, the Otsu algorithm returns a single intensity threshold th
 
 ![image](https://upload.wikimedia.org/wikipedia/commons/3/34/Otsu%27s_Method_Visualization.gif)
 
+## Application Workflow
 The Water Bodies detection steps are depicted below:
 
 ``` mermaid
@@ -46,9 +46,9 @@ end
   E --> F[Create STAC]
 ```
 
-The application takes a list of Sentinel-2 STAC items references, applies the crop over the area of interest for the radiometric bands green and NIR, the normalized difference, the Ostu threshold and finaly creates a STAC catalog and items for the generated results.
+The application takes a list of Sentinel-2 STAC items references and then crops the radiometric bands `green` and `NIR` with a user-defined area of interest (AOI). Each cropped band is then used to calculate the `NDWI` and subsequently the Otsu threashold is applied to it, generating the water bodies output mask. The final step of the workflow consists on generating the STAC catalog and items for the generated results.
 
-Alice organizes the Application Package to include a macro workflow that reads the list of Sentinel-2 STAC items references, launches a sub-workflow to detect the water bodies and creates the STAC catalog:
+Alice organizes the Application Package to include a macro workflow that reads the list of Sentinel-2 STAC items references, the AOI and the EPSG code. The workflow steps include i) a sub-workflow for the detection of the water bodies and ii) a step to create the STAC catalog of the generated output product(s)
 
 ![image](water_bodies.png "water-bodies")
 
@@ -56,26 +56,21 @@ The sub-workflow applies the  `crop`, `Normalized difference`, `Otsu threshold` 
 
 ![image](detect_water_body.png "detect-water-body")
 
-
+## Input Sentinel-2 acquisitions
 The development and test dataset is made of two Sentinel-2 acquisitions:
 
-| Acquisitions 	|                           	|                           	|
+| Acquisitions 	|Image 1                    	|Image 2                    	|
 |--------------	|---------------------------	|---------------------------	|
 | Date         	|2021-07-13                 	|2022-05-24                 	|
 | URL          	| [S2B_10TFK_20210713_0_L2A](https://earth-search.aws.element84.com/v0/collections/sentinel-s2-l2a-cogs/items/S2B_10TFK_20210713_0_L2A) 	| [S2A_10TFK_20220524_0_L2A](https://earth-search.aws.element84.com/v0/collections/sentinel-s2-l2a-cogs/items/S2A_10TFK_20220524_0_L2A) 	|
 | Quicklook    	| ![image](img_20210713.jpg) 	| ![image](img_20220504.jpg) 	|
 
-Alice uses an IDE to implement and test the application. 
+## Environments creation
 
-Each `Command Line Tool` step such as `crop`, `Normalized difference`, `Otsu threshold` and `Create STAC` runs a Python script in a dedicated container.
+Each `Command Line Tool` step (`crop`, `Normalized difference`, `Otsu threshold` and `Create STAC`) runs a Python script in a dedicated environment / container. 
+To generate the environments, open a new Terminal and execute the commands below:
 
-#### Hands-on
-
-<a href="https://mybinder.org/v2/gh/cwl-for-eo/vscode-binder/master?urlpath=git-pull%3Frepo%3Dhttps%253A%252F%252Fgithub.com%252FTerradue%252Fogc-eo-application-package-hands-on%26urlpath%3D%252Fvscode%252F%253Ffolder%253D%252Fhome%252Fjovyan%252Fogc-eo-application-package-hands-on%252Fwater-bodies%26branch%3Dmaster" target="_blank"><img src="https://img.shields.io/badge/launch-code%20server-lightgrey" alt="Run the hands-on on Code Server" ></img></a> 
-
-Once the Code Server instance is up, open a new Terminal and create the Python environments to run the Application Package steps:
-
-```console
+```
 mamba create -c conda-forge -y -p /srv/conda/envs/env_crop  gdal click pystac 
 mamba create -c conda-forge -y -p /srv/conda/envs/env_norm_diff click gdal  
 mamba create -c conda-forge -y -p /srv/conda/envs/env_otsu gdal scikit-image click 
@@ -83,42 +78,12 @@ mamba create -c conda-forge -y -p /srv/conda/envs/env_stac click pystac python=3
     /srv/conda/envs/env_stac/bin/pip install rio_stac
 mamba clean --all -f -y
 ```
-This configuration step takes a few minutes to complete and prints:
 
-```
-jovyan@jupyter-cwl-2dfor-2deo-2dvscode-2dbinder-2dv5n1yyn4:~/ogc-eo-application-package-hands-on/water-bodies$ mamba create -c conda-forge -y -p /srv/conda/envs/env_crop  gdal click pystac 
--forge -y -p /srv/conda/envs/env_norm_diff click gdal  
-mamba create -c conda-forge -y -p /srv/conda/envs/env_otsu gdal scikit-image click 
-mamba create -c conda-forge -y -p /srv/conda/envs/env_stac click pystac python=3.9 pip && \
-    /srv/conda/envs/env_stac/bin/pip install rio_stac
-mamba clean --all -f -y
-                  __    __    __    __
-                 /  \  /  \  /  \  /  \
-                /    \/    \/    \/    \
-███████████████/  /██/  /██/  /██/  /████████████████████████
-              /  / \   / \   / \   / \  \____
-             /  /   \_/   \_/   \_/   \    o \__,
-            / _/                       \_____/  `
-            |/
-        ███╗   ███╗ █████╗ ███╗   ███╗██████╗  █████╗
-        ████╗ ████║██╔══██╗████╗ ████║██╔══██╗██╔══██╗
-        ██╔████╔██║███████║██╔████╔██║██████╔╝███████║
-        ██║╚██╔╝██║██╔══██║██║╚██╔╝██║██╔══██╗██╔══██║
-        ██║ ╚═╝ ██║██║  ██║██║ ╚═╝ ██║██████╔╝██║  ██║
-        ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚═════╝ ╚═╝  ╚═╝
+This configuration step takes around five minutes to complete.
 
-        mamba (1.2.0) supported by @QuantStack
+## Application Package
+The Application can be executed with the following commands. 
 
-        GitHub:  https://github.com/mamba-org/mamba
-        Twitter: https://twitter.com/QuantStack
-
-█████████████████████████████████████████████████████████████
-...
-
-...
-
-Will remove 1 package cache(s).
-```
 
 #### Code inspection
 
