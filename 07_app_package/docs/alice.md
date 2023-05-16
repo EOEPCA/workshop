@@ -1,4 +1,4 @@
-# Water bodies detection Application Package development and test
+# Water bodies detection Application Package development and testing
 
 
 **Alice implements the application package**
@@ -68,7 +68,7 @@ The development and test dataset is made of two Sentinel-2 acquisitions:
 ## Environments creation
 
 Each `Command Line Tool` step (`crop`, `Normalized difference`, `Otsu threshold` and `Create STAC`) runs a Python script in a dedicated environment / container. 
-To generate the environments, open a new Terminal and execute the commands below:
+To generate the environments, open a new `Terminal` and execute the commands below (either one by one or all at once):
 
 ```
 mamba create -c conda-forge -y -p /srv/conda/envs/env_crop  gdal click pystac 
@@ -81,34 +81,30 @@ mamba clean --all -f -y
 
 This configuration step takes around five minutes to complete.
 
-## Application Package
-The Application can be executed with the following commands. 
+## Application Package inspection
 
+Open the `app-package.cwl` Application Package and familiarise yourself with its structure, to understand what's going on during execution:  
 
-#### Code inspection
+1. Inspect the main workflow which `id` is **`water_bodies`**: 
+    1.1. What are the input parameters? *(stac_items, aoi, epsg)*
+    1.2. What are the steps of this workflow? *(node_water_bodies, node_stac)* 
+2. Inspect the workflow which `id` is **`detect_water_body`**:
+    2.1. What are the steps of this workflow? *(node_crop, node_normalized_difference, node_otsu)*
+3. Inspect each of the `CommandLineTool` of `id`: **`crop`**, **`norm_diff`**, **`otsu`** and **`stac`** 
+    3.1. Inspect each of the `Dockerfile` 
 
-Get yourself familiar with what the command line tools do when invoked.
+## Application Package execution
 
-1. Inspect each of the command line tools `crop`, `norm_diff`, `otsu` and `stac` Python script
-2. Inspect each of the `Dockerfile` 
-
-#### Application Package execution
-
-1. Go to `Terminal` to open a new terminal
-2. Run the water bodies detection Application Package with: 
+The water bodies Application Package can be executed with: 
 
 ```
 cwltool --no-container app-package.cwl#water_bodies params.yml > out.json
 ```
 
-`cwltool` is a Common Workflow Language runner. 
-
-The flag `--no-container` is used to instruct `cwltool` to use the local command-line tools instead of using the containers as Binder cannot launch containers.
-
-`app-package.cwl#water_bodies` defines the CWL file to execute and instructs `cwltool` which element to run. Here it's the `Workflow` with the id `water_bodies`.
-
-The file `params.yml` contains the parameters:
-
+* `cwltool` is a Common Workflow Language runner. 
+* The flag `--no-container` is used to instruct `cwltool` to use the local command-line tools instead of using the containers.
+* `app-package.cwl#water_bodies` defines the CWL file to execute as well as the entry point after the `#` symbol. Here it's the `Workflow` with the id `water_bodies`.
+* The file `params.yml` is used to define the input parameters. In this case, these are:
 ```
 stac_items:
 - "https://earth-search.aws.element84.com/v0/collections/sentinel-s2-l2a-cogs/items/S2B_10TFK_20210713_0_L2A"
@@ -117,11 +113,12 @@ stac_items:
 aoi: "-121.399,39.834,-120.74,40.472"
 epsg: "EPSG:4326"
 ```
+* `out.json` is used to store the execution logs 
 
 The `cwltool` execution prints: 
 
 ```console
-jovyan@jupyter-cwl-2dfor-2deo-2dvscode-2dbinder-2dv5n1yyn4:~/ogc-eo-application-package-hands-on/water-bodies$ cwltool --no-container app-package.cwl#water_bodies params.yml > out.json
+jovyan@d6b06a2ce3d5:/workspace/workshop/07_app_package/water-bodies$ cwltool --no-container app-package.cwl#water_bodies params.yml > out.json
 INFO /srv/conda/envs/notebook/bin/cwltool 3.1.20221201130942
 INFO Resolved 'app-package.cwl#water_bodies' to 'file:///home/jovyan/ogc-eo-application-package-hands-on/water-bodies/app-package.cwl#water_bodies'
 INFO [workflow ] start
@@ -166,10 +163,9 @@ INFO [workflow ] completed success
 INFO Final process status is success
 ```
 
-Once the workflow execution is completed, there's a folder with the results generated.
+Once the workflow execution is completed, there's a folder with the generated results.
 
 The JSON file `out.json` is a manifest containing the listing of the results included in that folder:
-
 
 ```json
 {
@@ -240,12 +236,10 @@ The JSON file `out.json` is a manifest containing the listing of the results inc
 }
 ```
 
-#### Result inspection
+## Result inspection
+The output files are saved in a new directory generated during the `cwltool` execution. Inside this directory, you will find: 
+* `catalog.json` file 
+* `S2A_10TFK_20220524_0_L2A` subdirectory, containing the output TIF water mask (`otsu.tif`) and its related STAC Item 
+* `S2B_10TFK_20210713_0_L2A` subdirectory, containing the output TIF water mask (`otsu.tif`) and its related STAC Item
 
-If you're running the Hands-on on Binder, you can inspect and plt the results with a Jupyter Notebook.
-
-The results are inspected and visualized with the `visualization.ipynb` notebook on [JupyterLab](../../../../lab) by running all cells. This notebook uses pystac to access the geotiffs produced, leafmap to plot the tiles served by a local tile server.
-
-Technically, the notebook parses the results produced looking for the STAC Catalog file `catalog.json` and adds the STAC items' `data` asset on the map.
-
-
+You can plot the output TIF with the `visualisation.ipynb` Jupyter Notebook. This Notebook uses `pystac` to access the geotiffs produced, `leafmap` to plot the tiles served by a local tile server. Open the Notebook and run all cells. 
