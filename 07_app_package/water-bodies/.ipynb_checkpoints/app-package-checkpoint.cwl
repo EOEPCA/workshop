@@ -125,7 +125,7 @@ $graph:
     EnvVarRequirement:
       envDef: 
         PATH: /srv/conda/envs/env_crop/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-        PYTHONPATH: /home/jovyan/ogc-eo-application-package-hands-on/water-bodies/command-line-tools/crop:/home/jovyan/water-bodies/command-line-tools/crop:/workspaces/vscode-binder/command-line-tools/crop
+        PYTHONPATH: /home/jovyan/ogc-eo-application-package-hands-on/water-bodies/command-line-tools/crop:/home/jovyan/water-bodies/command-line-tools/crop:/workspaces/vscode-binder/command-line-tools/crop:/workspace/workshop/07_app_package/water-bodies/command-line-tools/crop
         PROJ_LIB: /srv/conda/envs/env_crop/share/proj/
     ResourceRequirement:
       coresMax: 2
@@ -168,7 +168,7 @@ $graph:
     EnvVarRequirement:
       envDef: 
         PATH: /srv/conda/envs/env_norm_diff/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-        PYTHONPATH: /workspaces/ogc-eo-application-package-hands-on/water-bodies/command-line-tools/norm_diff:/home/jovyan/ogc-eo-application-package-hands-on/water-bodies/command-line-tools/norm_diff:/workspaces/vscode-binder/command-line-tools/norm_diff
+        PYTHONPATH: /workspaces/ogc-eo-application-package-hands-on/water-bodies/command-line-tools/norm_diff:/home/jovyan/ogc-eo-application-package-hands-on/water-bodies/command-line-tools/norm_diff:/workspaces/vscode-binder/command-line-tools/norm_diff:/workspace/workshop/07_app_package/water-bodies/command-line-tools/norm_diff
         PROJ_LIB: /srv/conda/envs/env_norm_diff/share/proj/
     ResourceRequirement:
       coresMax: 2
@@ -199,7 +199,7 @@ $graph:
     EnvVarRequirement:
       envDef: 
         PATH: /srv/conda/envs/env_otsu/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-        PYTHONPATH: /workspaces/ogc-eo-application-package-hands-on/water-bodies/command-line-tools/otsu:/home/jovyan/ogc-eo-application-package-hands-on/water-bodies/command-line-tools/otsu:/workspaces/vscode-binder/command-line-tools/otsu
+        PYTHONPATH: /workspaces/ogc-eo-application-package-hands-on/water-bodies/command-line-tools/otsu:/home/jovyan/ogc-eo-application-package-hands-on/water-bodies/command-line-tools/otsu:/workspaces/vscode-binder/command-line-tools/otsu:/workspace/workshop/07_app_package/water-bodies/command-line-tools/otsu
         PROJ_LIB: /srv/conda/envs/env_otsu/share/proj/
     ResourceRequirement:
       coresMax: 2
@@ -230,7 +230,7 @@ $graph:
     EnvVarRequirement:
       envDef: 
         PATH: /srv/conda/envs/env_stac/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-        PYTHONPATH: /workspaces/ogc-eo-application-package-hands-on/water-bodies/command-line-tools/stac:/home/jovyan/ogc-eo-application-package-hands-on/water-bodies/command-line-tools/stac:/workspaces/vscode-binder/command-line-tools/stac
+        PYTHONPATH: /workspaces/ogc-eo-application-package-hands-on/water-bodies/command-line-tools/stac:/home/jovyan/ogc-eo-application-package-hands-on/water-bodies/command-line-tools/stac:/workspaces/vscode-binder/command-line-tools/stac:/workspace/workshop/07_app_package/water-bodies/command-line-tools/stac
         PROJ_LIB: /srv/conda/envs/env_stac/lib/python3.9/site-packages/rasterio/proj_data
     ResourceRequirement:
       coresMax: 2
