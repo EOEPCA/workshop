@@ -243,3 +243,11 @@ The output files are saved in a new directory generated during the `cwltool` exe
 * `S2B_10TFK_20210713_0_L2A` subdirectory, containing the output TIF water mask (`otsu.tif`) and its related STAC Item
 
 You can plot the output TIF with the `visualisation.ipynb` Jupyter Notebook. This Notebook uses `pystac` to access the geotiffs produced, `leafmap` to plot the tiles served by a local tile server. Open the Notebook and run all cells. 
+
+Run the commands below to create the `env_visual` environment, activate it, and install the Jupyter Notebook kernel:
+```
+mamba create -c conda-forge -y -p /srv/conda/envs/env_visual pystac ipykernel jupyterlab localtileserver pip && \
+    /srv/conda/envs/env_visual/bin/pip install leaflet leafmap
+conda activate env_visual
+python -m ipykernel install --user --name "env_visual"
+```
