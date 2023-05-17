@@ -247,7 +247,7 @@ You can plot the output TIF with the `visualisation.ipynb` Jupyter Notebook. Thi
 Run the commands below to create the `env_visual` environment, activate it, and install the Jupyter Notebook kernel:
 ```
 mamba create -c conda-forge -y -p /srv/conda/envs/env_visual pystac ipykernel jupyterlab localtileserver pip && \
-    /srv/conda/envs/env_visual/bin/pip install leaflet leafmap
+    /srv/conda/envs/env_visual/bin/pip install leaflet leafmap pyproj
 conda activate env_visual
 python -m ipykernel install --user --name "env_visual"
 ```
