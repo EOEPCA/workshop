@@ -16,5 +16,5 @@ resources:
   - 105-ades-guard.yaml
   - 110-harbor.yaml
   - 120-workspace-api.yaml
-  - 121-workspace-charts.yaml
+  - workspace-charts
   - 125-workspace-api-guard.yaml
