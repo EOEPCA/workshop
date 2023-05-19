@@ -1,9 +1,10 @@
-Summary of details for workshop preparation...
+# Developer Notes for Workshop Preparation
 
 Each participant will have their own VM running in CREODIAS. Currently there is a single VM accessible through the public IP `185.52.195.215` and can be accessed by ssh...
 ```
 ssh eouser@185.52.195.215 (password foss4gworkshop)
 ```
+...the intention being to use this VM as a representative environment against which to prepare the notebooks.<br>
 Each participant VM will be the same but with a different public IP.
 
 The git repo for the workshop is here - https://github.com/EOEPCA/workshop
