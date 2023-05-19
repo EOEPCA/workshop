@@ -163,7 +163,9 @@ INFO [workflow ] completed success
 INFO Final process status is success
 ```
 
-Once the workflow execution is completed, there's a folder with the generated results.
+## Result inspection
+
+Once the workflow execution is completed, there's a folder, which name is a 8-character alphanumeric string, with the generated results.
 
 The JSON file `out.json` is a manifest containing the listing of the results included in that folder:
 
@@ -236,8 +238,7 @@ The JSON file `out.json` is a manifest containing the listing of the results inc
 }
 ```
 
-## Result inspection
-The output files are saved in a new directory generated during the `cwltool` execution. Inside this directory, you will find: 
+The output files are saved in a new folder generated during the `cwltool` execution. Inside this directory, you will find: 
 * `catalog.json` file 
 * `S2A_10TFK_20220524_0_L2A` subdirectory, containing the output TIF water mask (`otsu.tif`) and its related STAC Item 
 * `S2B_10TFK_20210713_0_L2A` subdirectory, containing the output TIF water mask (`otsu.tif`) and its related STAC Item
