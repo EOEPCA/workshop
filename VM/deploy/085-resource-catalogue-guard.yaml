@@ -67,4 +67,5 @@ type: Opaque
 metadata:
   name: authz-agent
   namespace: rm
-data: {}
+data:
+  client.yaml: Y2xpZW50LWlkOiA2MTY3NDM0MC0wZGM1LTRiYTQtYTA3MS0xOGRiNTFkMGRhMmQKY2xpZW50LXNlY3JldDogYWY2YmIwYzItNGQ1Zi00ZTZmLTgwZGMtNjAxMzdmMmRiNDFj
