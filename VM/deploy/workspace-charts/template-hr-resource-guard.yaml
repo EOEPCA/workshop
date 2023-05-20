@@ -43,8 +43,8 @@ spec:
     # UMA User Agent values
     #---------------------------------------------------------------------------
     uma-user-agent:
-      image:
-        tag: "v1.2.1"
+      # image:
+      #   tag: "v1.2.1"
       nginxIntegration:
         enabled: true
         hosts:
