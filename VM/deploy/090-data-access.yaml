@@ -805,6 +805,10 @@ spec:
       #-------------------------------------------------------------------------
       registrar:
         replicaCount: 1
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
         config:
           #--------------
           # Default route
