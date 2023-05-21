@@ -862,6 +862,10 @@ spec:
       #-------------------------------------------------------------------------
       harvester:
         replicaCount: 1
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
         config:
           redis:
             host: data-access-redis-master
