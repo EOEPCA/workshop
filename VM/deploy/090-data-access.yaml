@@ -794,12 +794,11 @@ spec:
         ingress:
           enabled: false
         resources:
-          limits:
-            cpu: 1.5
-            memory: 3Gi
           requests:
-            cpu: 0.5
-            memory: 1Gi
+            cpu: 100m
+            memory: 300Mi
+          limits:
+            memory: 3Gi
 
       #-------------------------------------------------------------------------
       # vs.registrar
