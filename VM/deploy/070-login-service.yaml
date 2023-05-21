@@ -41,9 +41,22 @@ spec:
     oxauth:
       volumeClaim:
         name: eoepca-userman-pvc
+      resources:
+        requests:
+          cpu: 100m
+          memory: 1000Mi
     oxtrust:
       volumeClaim:
         name: eoepca-userman-pvc
+      resources: 
+        requests:
+          cpu: 100m
+          memory: 1500Mi
+    oxpassport:
+      resources:
+        requests:
+          cpu: 100m
+          memory: 100Mi
     nginx:
       ingress:
         enabled: true
