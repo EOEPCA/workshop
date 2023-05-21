@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+ORIG_DIR="$(pwd)"
+cd "$(dirname "$0")"
+BIN_DIR="$(pwd)"
+
+onExit() {
+  cd "${ORIG_DIR}"
+}
+trap onExit EXIT
+
+mkdir -p $HOME/.local/bin
+
+curl -s -L https://github.com/robscott/kube-capacity/releases/download/v0.7.4/kube-capacity_v0.7.4_linux_x86_64.tar.gz \
+  | tar -C $HOME/.local/bin -xz kube-capacity
