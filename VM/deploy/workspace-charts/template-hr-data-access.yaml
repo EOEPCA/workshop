@@ -67,9 +67,19 @@ spec:
         replicaCount: 1
         ingress:
           enabled: false
+        resources:
+          requests:
+            cpu: 100m
+            memory: 300Mi
+          limits:
+            memory: 3Gi
 
       registrar:
         replicaCount: 1
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
         config:
           disableDefaultRoute: true
           routes:
@@ -127,6 +137,10 @@ spec:
                     repository_database_uri: postgresql://postgres:mypass@resource-catalogue-db/pycsw
 
       harvester:
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
         config:
           redis:
             host: vs-redis-master
@@ -172,6 +186,12 @@ spec:
             existingClaim: "" # we want the claim to be generated
             storageClass: standard
             size: "1Gi"
+
+      scheduler:
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
 
       ingestor:
         replicaCount: 0
