@@ -1,4 +1,4 @@
-FROM mambaorg/micromamba
+FROM docker.io/mambaorg/micromamba:latest
 
 USER root
 
@@ -24,8 +24,6 @@ RUN chown -R 1000:1000 /workspaces/vscode-binder/command-line-tools/crop
 USER mambauser
 
 RUN micromamba create -r /srv/conda -n env_crop -c conda-forge gdal click pystac  
-
-
 
 ADD app.py /workspaces/vscode-binder/command-line-tools/crop/app.py
 

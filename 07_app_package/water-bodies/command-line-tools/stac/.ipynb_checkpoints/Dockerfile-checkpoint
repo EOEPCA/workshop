@@ -1,4 +1,4 @@
-FROM mambaorg/micromamba
+FROM docker.io/mambaorg/micromamba:latest
 
 USER root
 
