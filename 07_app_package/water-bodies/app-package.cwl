@@ -133,7 +133,7 @@ $graph:
 
   hints:
     DockerRequirement:
-      dockerPull: crop
+      dockerPull: crop:0.1.0
 
   baseCommand: ["python", "-m", "app"]
   arguments: []
@@ -176,7 +176,7 @@ $graph:
 
   hints:
     DockerRequirement:
-      dockerPull: norm_diff
+      dockerPull: norm_diff:0.1.0
 
   baseCommand: ["python", "-m", "app"]
   arguments: []
@@ -207,7 +207,7 @@ $graph:
 
   hints:
     DockerRequirement:
-      dockerPull: otsu
+      dockerPull: otsu:0.1.0
   
   baseCommand: ["python", "-m", "app"]
   arguments: []
@@ -238,7 +238,7 @@ $graph:
 
   hints:
     DockerRequirement:
-      dockerPull: stac
+      dockerPull: stac:0.1.0
 
   baseCommand: ["python", "-m", "app"]
   arguments: []
