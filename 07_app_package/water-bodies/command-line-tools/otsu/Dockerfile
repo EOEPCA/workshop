@@ -15,11 +15,13 @@ RUN apt-get update -y \
 RUN echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 
-RUN mkdir -p /srv/conda && chown -R mambauser:1000 /srv/conda/ && chown -R mambauser:1000 /home/mambauser/.cache
+RUN mkdir -p /srv/conda && chown -R mambauser:1000 /srv/conda/
 
 RUN mkdir -p /workspaces/command-line-tools/otsu
 
 RUN chown -R 1000:1000 /workspaces/command-line-tools/otsu
+
+RUN chmod -R 777 /home/mambauser
 
 USER mambauser
 

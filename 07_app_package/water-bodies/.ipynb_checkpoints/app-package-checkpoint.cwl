@@ -133,7 +133,7 @@ $graph:
 
   hints:
     DockerRequirement:
-      dockerPull: crop:0.1.0
+      dockerPull: simonevaccari/crop:0.1.0
 
   baseCommand: ["python", "-m", "app"]
   arguments: []
@@ -176,7 +176,7 @@ $graph:
 
   hints:
     DockerRequirement:
-      dockerPull: norm_diff:0.1.0
+      dockerPull: simonevaccari/norm_diff:0.1.0
 
   baseCommand: ["python", "-m", "app"]
   arguments: []
@@ -207,7 +207,7 @@ $graph:
 
   hints:
     DockerRequirement:
-      dockerPull: otsu:0.1.0
+      dockerPull: simonevaccari/otsu:0.1.1
   
   baseCommand: ["python", "-m", "app"]
   arguments: []
@@ -238,7 +238,7 @@ $graph:
 
   hints:
     DockerRequirement:
-      dockerPull: stac:0.1.0
+      dockerPull: simonevaccari/stac:0.1.0
 
   baseCommand: ["python", "-m", "app"]
   arguments: []
