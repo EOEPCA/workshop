@@ -1,0 +1,117 @@
+
+@domain = 185-52-195-215.nip.io
+@ades = ades.{{domain}}
+@login = auth.{{domain}}
+@user = eric
+@pass = defaultPWD
+@clientId = b981d78d-0f26-4dfb-aefd-f207f5456e07
+@clientSecret = 6aee0301-6756-4acf-acb5-4e1d2d623875
+
+@tokenEndpoint = {{openidConfiguration.response.body.token_endpoint}}
+@idToken = {{authenticate.response.body.id_token}}
+@deployStatus = {{deployProcess.response.headers.Location}}
+@executeStatus = {{executeProcess.response.headers.Location}}
+
+###
+
+# @name openidConfiguration
+GET https://{{login}}/.well-known/openid-configuration HTTP/1.1
+Accept: application/json
+
+###
+
+# @name authenticate
+POST {{tokenEndpoint}} HTTP/1.1
+Cache-Control: no-cache
+Content-Type: application/x-www-form-urlencoded
+
+scope=openid user_name is_operator&grant_type=password&username={{user}}&password={{pass}}&client_id={{clientId}}&client_secret={{clientSecret}}
+
+###
+
+# @name listProcesses
+GET https://{{ades}}/{{user}}/wps3/processes HTTP/1.1
+Authorization: Bearer {{idToken}}
+Accept: application/json
+
+###
+
+# @name deployProcess
+POST https://{{ades}}/{{user}}/wps3/processes HTTP/1.1
+Authorization: Bearer {{idToken}}
+Accept: application/json
+Content-Type: application/json
+
+{
+  "executionUnit": {
+    "href": "https://raw.githubusercontent.com/EOEPCA/convert/main/convert-url-app.cwl",
+    "type": "application/cwl"
+  }
+}
+
+###
+
+# @name getDeployStatus
+GET https://{{ades}}{{deployStatus}} HTTP/1.1
+Authorization: Bearer {{idToken}}
+Accept: application/json
+
+###
+
+# @name getProcessDetails
+GET https://{{ades}}/{{user}}/wps3/processes/convert-url-0_1_2 HTTP/1.1
+Authorization: Bearer {{idToken}}
+Accept: application/json
+
+###
+
+# @name deleteProcess
+DELETE https://{{ades}}/{{user}}/wps3/processes/convert-url-0_1_2 HTTP/1.1
+Authorization: Bearer {{idToken}}
+Accept: application/json
+
+###
+
+# @name executeProcess
+POST https://{{ades}}/{{user}}/wps3/processes/convert-url-0_1_2/execution HTTP/1.1
+Authorization: Bearer {{idToken}}
+Accept: application/json
+Content-Type: application/json
+Prefer: respond-async
+
+{
+  "inputs": {
+      "fn": "resize",
+      "url":  "https://eoepca.org/media_portal/images/logo6_med.original.png",
+      "size": "50%"
+  },
+  "response":"raw"
+}
+
+###
+
+# @name getExecuteStatus
+GET https://{{ades}}{{executeStatus}} HTTP/1.1
+Authorization: Bearer {{idToken}}
+Accept: application/json
+
+###
+
+# @name getProcessingResults
+GET https://{{ades}}{{executeStatus}}/result HTTP/1.1
+Authorization: Bearer {{idToken}}
+Accept: application/json
+
+###
+
+# @name undeployProcess
+DELETE https://{{ades}}/{{user}}/wps3/processes/convert-url-0_0_1 HTTP/1.1
+Authorization: Bearer {{idToken}}
+Accept: application/json
+
+###
+
+# @name listJobs
+GET https://{{ades}}/{{user}}/wps3/jobs HTTP/1.1
+Authorization: Bearer {{idToken}}
+Accept: application/json
