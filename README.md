@@ -1,7 +1,10 @@
-# Workshop
+# EOEPCA Workshop - BiDS 2023
 
-Workshop explaining eoepca deployment and component features
+November 6th 2023
 
-## Deployments
+Workshop to demonstrate the capabilities of the EOEPCA building blocks...
 
-For the workshop, the EOEPCA system is deployed to a target Kubernetes cluster with a GitOps approach using Flux Continuous Delivery (https://fluxcd.io/). Deployments are stored under the `./deployment` directory.
+* Introduction – create your own workspace [20 mins]
+* Data Discovery, Search and Transactions [15 mins]
+* Services for Data Access and Visualisation [15 mins]
+* Processing Application Deploy, Execution and Results Exploitation [40 mins]

@@ -22,11 +22,4 @@ trap "onExit" EXIT
 kubectl config view --flatten --minify >kubeconfig
 chmod 600 kubeconfig
 
-# Need to join the minikube network for kubectl to work from within Notebooks.
-# In the case that Jupyter is not run locally to the running minikube then this
-# will not work, but we still need to ensure that the network named minikube
-# exists since it is referenced by the docker-compose file.
-# If the network already exists (e.g. if minikube is running) then this does no harm.
-docker network create minikube 2>/dev/null
-
 docker-compose -f docker-compose.yml up --build

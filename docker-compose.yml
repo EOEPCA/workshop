@@ -11,7 +11,7 @@ services:
     ports:
     - "${EXPOSE_PORT}:8888"
     networks:
-      - minikube
+      - workshop
     volumes:
     - ${PWD}/workshop:/home/${PUSER}/work
     - ${PWD}/kubeconfig:/home/${PUSER}/.kube/config
@@ -28,6 +28,5 @@ services:
     command: ["start-notebook.sh", "--NotebookApp.token=''" ]
 
 networks:
-  minikube:
-    name: minikube
-    external: true
+  workshop:
+    name: workshop
