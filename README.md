@@ -17,6 +17,7 @@ Workshop to demonstrate the capabilities of the EOEPCA building blocks.
 The workshop is conducted through a combination of:
 * Jupyter Notebooks
 * Presentation Slides
+* OpenAPI Web Endpoints
 * Web Applications
 
 The Jupyter Notebooks are designed to be run locally be each participant. The notebooks steps interface with the services of our EOEPCA Demo Cluster (demo.eoepca.org).
