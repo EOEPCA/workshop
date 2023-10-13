@@ -20,7 +20,7 @@ The workshop is conducted through a combination of:
 * OpenAPI Web Endpoints
 * Web Applications
 
-The Jupyter Notebooks are designed to be run locally be each participant. The notebooks steps interface with the services of our EOEPCA Demo Cluster (demo.eoepca.org).
+The Jupyter Notebooks are designed to be run locally be each participant. The notebook steps interface with the services of our EOEPCA Demo Cluster (demo.eoepca.org).
 
 There are two approaches to invoke the JupyterLab environment to exploit the notebooks...
 * **Pre-packaged Container Image**<br>
@@ -50,7 +50,7 @@ cd workshop
 ./run.sh
 ```
 
-This script maps your local copy of the notebooks (cloned from the repo) into the running container image. This ensures that you are using the latest versions of the notebooks from the repo, rather than the ones included in the container image - and so mitigates the possibility of last minute changes to the notebooks being missing from your copy of the container image. In addition, it allows your notebook executions to be persisted locally outside of the container.
+This script maps your local copy of the notebooks (cloned from the repo - in the sub-directory `workshop/notebooks/`) into the running container. This ensures that you are using the latest versions of the notebooks from the repo, rather than the ones included in the container image - and so mitigates the possibility of last minute changes to the notebooks being missing from your copy of the container image. In addition, it allows your notebook executions to be persisted locally outside of the container.
 
 The script equates to the following `docker run` command...
 
