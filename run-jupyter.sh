@@ -17,12 +17,12 @@ trap "onExit" EXIT
 
 export PYDEVD_DISABLE_FILE_VALIDATION=1
 
-python -m venv venv
-source venv/bin/activate
-python -m pip install -U pip
-pip install -U devtools
-pip install -U cmake
-pip install -U wheel setuptools
-pip install -U jupyterlab
-pip install -r workshop/requirements.txt
-jupyter-lab --ServerApp.root_dir workshop --NotebookApp.token=\'\' --no-browser
+python3.9 -m venv venv \
+  && source venv/bin/activate \
+  && python -m pip install -U pip \
+  && pip install -U devtools \
+  && pip install -U cmake \
+  && pip install -U wheel setuptools \
+  && pip install -U jupyterlab \
+  && pip install -r workshop/requirements.txt \
+  && jupyter-lab --ServerApp.root_dir workshop --NotebookApp.token=\'\' --no-browser
