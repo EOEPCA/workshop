@@ -3,6 +3,7 @@
 ORIG_DIR="$(pwd)"
 cd "$(dirname "$0")"
 BIN_DIR="$(pwd)"
+source functions
 
 TARGET_PYTHON_MAJOR=3
 TARGET_PYTHON_MINOR=9
@@ -51,7 +52,7 @@ deducePythonVersion() {
     if test -n "${PYTHON}"; then
       warning "WARNING: can't find python ${PYTHON_VERSION}. Using the best alternative found..."
     else
-      error "ERROR: can't find python ${PYTHON_VERSION}. Exiting..."
+      error "ERROR: can't find python ${PYTHON_VERSION}. Aborting..."
       return 1
     fi
   fi
@@ -66,9 +67,5 @@ optionalClean() {
     if test -d venv; then info "Using existing venv in directory $PWD/venv\n  -> Use option --clean to create a fresh environment"; fi
   fi
 }
-
-info() { echo -e "\033[0;34m${*}\033[0;0m"; }
-warning() { echo -e "\033[0;35m${*}\033[0;0m"; }
-error() { echo -e "\033[1;31m${*}\033[0;0m"; }
 
 main "$@"

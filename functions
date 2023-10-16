@@ -1,0 +1,17 @@
+
+# Colours
+# * styles: 0 (standard), 1 (bold), 2 (low intensity), 4 (underline), 5 (blinking), 8 (invisible), 9 (strikethrough)
+BLACK="\033[0;30m"
+RED="\033[0;31m"
+RED_BOLD="\033[1;31m"
+GREEN="\033[0;32m"
+ORANGE="\033[0;33m"
+BLUE="\033[0;34m"
+PURPLE="\033[0;35m"
+CYAN="\033[0;36m"
+GREY="\033[0;37m"
+RESET="\033[0;0m"
+
+info() { echo -e "${BLUE}${*}${RESET}"; }
+warning() { echo -e "${PURPLE}${*}${RESET}"; }
+error() { echo -e "${RED_BOLD}${*}${RESET}"; }
