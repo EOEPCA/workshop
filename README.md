@@ -6,11 +6,11 @@ Workshop to demonstrate the capabilities of the EOEPCA building blocks.
 
 ## Agenda
 
-* Introduction and Setup [5 mins]
+* Introduction and Setup [10 mins]
 * Data Discovery, Search and Transactions [15 mins]
 * Services for Data Access and Visualisation [15 mins]
 * User Workspace - data upload, registration and visualisation [15 mins]
-* Processing Application Deploy, Execution and Results Exploitation [40 mins]
+* Application Package understanding, deployment and execution [35 mins]
 
 ## Participant Pre-requisites
 
