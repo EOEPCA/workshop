@@ -8,10 +8,9 @@ ipyleaflet
 jsonschema
 lxml
 matplotlib
-OWSLib @ git+https://github.com/geopython/OWSLib@018c7f83fb042a6390d65aaa683110743609f3e3
+OWSLib
 pycrypto
 pyjwkest
-pyops @ git+https://github.com/EOFarm/pyops@4b53b097d098e880605056f0bcad8ca7993a2c62
 pystac-client
 rauth
 robotframework
