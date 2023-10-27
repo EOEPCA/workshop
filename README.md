@@ -4,6 +4,19 @@ November 6th 2023
 
 Workshop to demonstrate the capabilities of the EOEPCA building blocks.
 
+- [EOEPCA Workshop - BiDS 2023](#eoepca-workshop---bids-2023)
+  - [Agenda](#agenda)
+  - [Participant Pre-requisites](#participant-pre-requisites)
+  - [Use GitHub Codespace](#use-github-codespace)
+    - [Instantiate the Codespace](#instantiate-the-codespace)
+    - [Run JupyterLab inside Codespace](#run-jupyterlab-inside-codespace)
+    - [Open JupyterLab in Browser](#open-jupyterlab-in-browser)
+    - [Delete Codespace](#delete-codespace)
+  - [Use Pre-packaged Container Image](#use-pre-packaged-container-image)
+  - [Use Native JupyterLab](#use-native-jupyterlab)
+    - [Clone the Workshop Repo](#clone-the-workshop-repo)
+    - [Run JupyterLab in Native Python](#run-jupyterlab-in-native-python)
+
 ## Agenda
 
 * Introduction and Setup [10 mins]
@@ -67,12 +80,16 @@ At this point you have an environment that includes a Python (3.9) installation 
 Within the Codespace, the `TERMINAL` can be used to follow the [Run JupyterLab in Native Python](#run-jupyterlab-in-native-python) instructions (below) to run JupyterLab...
 
 <p align="center">
-  <img src="./assets/run-jupyter-in-codespace.png" alt="Run Jupyter in Codespace" />
+  <img src="./assets/run-jupyterlab-in-codespace.png" alt="Run JupyterLab in Codespace" />
 </p>
 
-**The [running server](http://127.0.0.1:8888/lab) is available at the local address http://127.0.0.1:8888/lab.**
+### Open JupyterLab in Browser
 
-NOTE that the Codespace configures Port Forwarding to make the JupyterLab web application (running in GitHub) available via a local port.
+The JupyterLab server runs on port `8888`. The Codespace establishes some port forwarding such that it is accessible via a URL of the form https://`your-unique-codespace-id`-8888.app.github.dev/lab. JupyterLab can be opened by either clicking the `Open in Browser` button (bottom right), or by Ctrl-clicking the `http://127.0.0.1:8888/lab` URL in the terminal window (stdout from JupyterLab).
+
+<p align="center">
+  <img src="./assets/open-jupyterlab-in-browser.png" alt="Open JupyterLab in Browser" />
+</p>
 
 ### Delete Codespace
 

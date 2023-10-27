@@ -27,6 +27,9 @@ runWithPython() {
   info "Using python command - $(which $PYTHON)"
   $PYTHON -m venv venv \
     && source venv/bin/activate \
+    && python -m pip install -U pip \
+    && pip install -U pycrypto \
+    && pip install -U wheel \
     && pip install -U jupyterlab \
     && pip install -r workshop/requirements.txt \
     && jupyter-lab --ServerApp.root_dir workshop --NotebookApp.token=\'\' --no-browser
