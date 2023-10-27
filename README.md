@@ -40,7 +40,7 @@ The Jupyter Notebooks are designed to be run locally be each participant. The no
 There are several approaches to invoke the JupyterLab environment to exploit the notebooks...
 * **GitHub Codespace**<br>
   Instantiate a GitHub Codespace on the `workshop` repository, from which JupyterLab can be invoked. We have prepared a suitable Codespace to facilitate this.<br>
-  **_This approaches requires no installation on your local PC, since it runs entirely within GitHub infrastructure, and relies only on your local browser_**
+  **_This approach requires no installation on your local PC, since it runs entirely within GitHub infrastructure, and relies only on your local browser_**
 * **Pre-packaged Container Image**<br>
   Via our pre-prepared container image that includes JupyterLab and all necessary files<br>
   **_This approach requires docker running on your local PC and to download (pull) the workshop container image_**
