@@ -4,9 +4,6 @@ SHELL ["/bin/bash", "-c"]
 
 USER root
 
-RUN apt-get update \
-  && apt-get -y install gcc
-
 RUN mkdir /app \
   && chown -R vscode:vscode /app
 
