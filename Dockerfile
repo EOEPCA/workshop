@@ -1,23 +1,27 @@
-FROM jupyter/scipy-notebook:lab-3.0.14
+FROM mcr.microsoft.com/devcontainers/python:1-3.9-bullseye
 
-# Kubernetes support files
+SHELL ["/bin/bash", "-c"]
+
 USER root
-RUN apt-get update && \
-    apt-get install -y curl && \
-    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && \
-    install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl && \
-    curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
-# Use the built-in user
-USER ${NB_USER}
+RUN apt-get update \
+  && apt-get -y install gcc
 
-# Move to the work dir
-WORKDIR ${HOME}/work
+RUN mkdir /app \
+  && chown -R vscode:vscode /app
 
-# Install the python requirements in an early layer,
-# since it shouldn't change that often and takes a while to execute.
-COPY --chown=${NB_UID}:${NB_GID} workshop/requirements.txt .
-RUN pip install --no-cache-dir -U -r requirements.txt
+USER vscode
+WORKDIR /app
 
-# Copy across the demo files
-COPY --chown=${NB_UID}:${NB_GID} workshop .
+COPY --chown=vscode functions .
+COPY --chown=vscode workshop/requirements.txt workshop/requirements.txt
+
+RUN source functions \
+  && export PYTHON=`which python` \
+  && createVenv
+
+COPY --chown=vscode run-jupyter.sh .
+
+COPY --chown=vscode workshop workshop
+
+ENTRYPOINT [ "bash" ]

@@ -22,17 +22,11 @@ main() {
 
 runWithDocker() {
   if hash docker 2>/dev/null; then
-    docker run --rm --name jupyterlab \
-      --user root \
-      -p 8888:8888 \
-      -v ${PWD}/workshop:/home/${NB_USER}/work \
-      -e NB_USER="${NB_USER}" \
-      -e NB_UID="${NB_UID}" \
-      -e NB_GID="${NB_GID}" \
-      -e CHOWN_HOME="yes" \
-      -e JUPYTER_ENABLE_LAB="yes" \
+    docker run --rm -it --name jupyterlab \
+      -p ${EXPOSE_PORT}:8888 \
+      -v ${PWD}/workshop:/app/workshop \
       eoepca/workshop \
-      start-notebook.sh --NotebookApp.token=\'\'
+      run-jupyter.sh
   else
     error "ERROR: docker must be installed - not found. Aborting..."
     return 1
