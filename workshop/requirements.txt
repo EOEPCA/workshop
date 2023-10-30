@@ -11,7 +11,7 @@ matplotlib
 OWSLib
 pycrypto
 pyjwkest
-pystac-client
+pystac-client==0.6.1
 rauth
 robotframework
 tifffile
