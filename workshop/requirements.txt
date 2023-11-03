@@ -16,3 +16,4 @@ rauth
 robotframework
 tifffile
 WellKnownHandler
+rasterio
