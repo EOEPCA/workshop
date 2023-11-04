@@ -1,0 +1,138 @@
+{
+  "stac_version": "1.0.0-beta.2",
+  "stac_extensions": [
+    "eo",
+    "https://stac-extensions.github.io/eo/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/raster/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/sat/v1.0.0/schema.json"
+  ],
+  "type": "Feature",
+  "id": "S2B_MSIL2A_20200902T090559_N0214_R050_T34SFH_20200902T113910",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          22.498554706649905,
+          37.84854425017363
+        ],
+        [
+          22.498554706649905,
+          37.84854425017363
+        ],
+        [
+          23.384099971340483,
+          37.83530211029287
+        ],
+        [
+          23.416732203212913,
+          38.82399234658653
+        ],
+        [
+          22.783028654057077,
+          38.833676133865055
+        ],
+        [
+          22.742581944777008,
+          38.69065042678305
+        ],
+        [
+          22.6997460076934,
+          38.5431541241642
+        ],
+        [
+          22.655054405811928,
+          38.39626748980249
+        ],
+        [
+          22.61198517336473,
+          38.24899119366556
+        ],
+        [
+          22.56934163224679,
+          38.10165447967356
+        ],
+        [
+          22.529668783715195,
+          37.953412568353926
+        ],
+        [
+          22.498554706649905,
+          37.84854425017363
+        ]
+      ]
+    ]
+  },
+  "properties": {
+    "datetime": "2020-09-02T09:05:59.024Z",
+    "created": "2020-09-02T11:39:10Z",
+    "updated": "2022-12-20T17:03:38.7362264Z",
+    "platform": "sentinel-2b",
+    "constellation": "sentinel-2",
+    "mission": "sentinel-2",
+    "instruments": [
+      "msi"
+    ],
+    "sensor_type": "optical",
+    "gsd": 10.0,
+    "sat:orbit_state": "descending",
+    "sat:absolute_orbit": 18237,
+    "sat:relative_orbit": 50,
+    "sat:platform_international_designator": "2015-000A",
+    "processing:level": "L2A",
+    "processing:lineage": "Generation of Level-2A User Product",
+    "proj:epsg": null,
+    "title": "SENTINEL-2B MSI L2A 50 2020-09-02 09:05:59",
+    "processing_baseline": "02.14",
+    "providers": [
+      {
+        "name": "ESA/EC (Copernicus)",
+        "description": "The Copernicus Sentinel-2 mission comprises a constellation of two polar-orbiting satellites placed in the same sun-synchronous orbit, phased at 180° to each other. It aims at monitoring variability in land surface conditions, and its wide swath width (290 km) and high revisit time (10 days at the equator with one satellite, and 5 days with 2 satellites under cloud-free conditions which results in 2-3 days at mid-latitudes) will support monitoring of Earth's surface changes.",
+        "roles": [
+          "producer",
+          "processor",
+          "licensor"
+        ],
+        "url": "https://sentinel.esa.int/web/sentinel/missions/sentinel-2"
+      }
+    ]
+  },
+  "bbox": [
+    22.498554706649905,
+    37.83530211029287,
+    23.416732203212913,
+    38.833676133865055
+  ],
+  "assets": {
+    "ndvi": {
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "roles": [
+        "data"
+      ],
+      "href": "ndvi.tif",
+      "s-expression": "(/ (- nir red) (+ nir red))",
+      "eo:bands": [
+        {
+          "name": "ndvi",
+          "common_name": "ndvi",
+          "description": "ndvi ((/ (- nir red) (+ nir red)))"
+        }
+      ],
+      "file:size": 78134268
+    }
+  },
+  "links": [
+    {
+      "type": "application/json",
+      "rel": "parent",
+      "href": "../catalog.json"
+    },
+    {
+      "type": "application/json",
+      "rel": "root",
+      "href": "../catalog.json"
+    }
+  ]
+}
